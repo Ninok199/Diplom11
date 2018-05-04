@@ -19,5 +19,6 @@
         <activity android:name=".View.ConfigurationActivity"></activity>
         <activity android:name=".View.ChoiceLevelActivity"></activity>
         <activity android:name=".View.ChoiceModeActivity"></activity>
+        <activity android:name=".View.ChangeViewActivity"></activity>
     </application>
 </manifest>

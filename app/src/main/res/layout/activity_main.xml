@@ -7,6 +7,7 @@
     tools:context="com.example.diplom11.MainActivity">
 
     <TextView
+        android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Hello World!"
@@ -16,62 +17,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.123" />
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="100dp"
-        android:layout_height="51dp"
-        android:layout_marginBottom="282dp"
-        android:layout_marginEnd="234dp"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="182dp"
-        android:text="Button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="281dp"
-        android:layout_marginEnd="47dp"
-        android:layout_marginStart="99dp"
-        android:layout_marginTop="182dp"
-        android:text="Button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/button"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/button3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="139dp"
-        android:layout_marginEnd="248dp"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="95dp"
-        android:text="Button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
-
-    <Button
-        android:id="@+id/button4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="139dp"
-        android:layout_marginEnd="56dp"
-        android:layout_marginStart="104dp"
-        android:layout_marginTop="94dp"
-        android:text="Button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/button3"
-        app:layout_constraintTop_toBottomOf="@+id/button2" />
-
     <ImageButton
         android:id="@+id/buttonConfig"
         android:layout_width="wrap_content"
@@ -79,11 +24,25 @@
         android:layout_marginBottom="4dp"
         android:layout_marginEnd="322dp"
         android:layout_marginStart="6dp"
-        android:layout_marginTop="82dp"
         android:onClick="onClickConfigMenu"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button3"
         app:srcCompat="@android:drawable/ic_menu_preferences" />
+
+    <GridView
+        android:id="@+id/gridbuttonsview"
+        android:layout_width="356dp"
+        android:layout_height="171dp"
+        android:layout_marginBottom="66dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="138dp"
+        android:numColumns="2"
+        android:verticalSpacing="50dp"
+        app:layout_constraintBottom_toTopOf="@+id/buttonConfig"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
 </android.support.constraint.ConstraintLayout>
