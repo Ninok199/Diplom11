@@ -9,7 +9,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import com.example.diplom11.Presenters.ConfigPresenter;
+import com.example.diplom11.Presenters.BasePresenter;
 import com.example.diplom11.Presenters.ConfigPresenterImpl;
 import com.example.diplom11.R;
 
@@ -17,7 +17,7 @@ import com.example.diplom11.R;
 
 public class ConfigurationActivity extends AppCompatActivity  {
     ListView menu;
-    ConfigPresenter presenter;
+    BasePresenter presenter;
     Intent intent;
 
     @Override

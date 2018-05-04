@@ -2,7 +2,7 @@ package com.example.diplom11.Presenters;
 
 
 
-public interface ConfigPresenter {
+public interface BasePresenter {
 
 
     void onBackClick();

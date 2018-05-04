@@ -3,11 +3,12 @@ package com.example.diplom11.Presenters;
 
 
 import com.example.diplom11.View.ChoiceLevelActivity;
+import com.example.diplom11.View.ChoiceModeActivity;
 import com.example.diplom11.View.ConfigurationActivity;
 
 
 
-public class ConfigPresenterImpl implements ConfigPresenter {
+public class ConfigPresenterImpl implements BasePresenter {
 
     private ConfigurationActivity activity;
 
@@ -28,6 +29,8 @@ public class ConfigPresenterImpl implements ConfigPresenter {
             case 0:
                 activity.openActivity(ChoiceLevelActivity.class);
                 break;
+            case 1:
+                activity.openActivity(ChoiceModeActivity.class);
 
         }
     }
