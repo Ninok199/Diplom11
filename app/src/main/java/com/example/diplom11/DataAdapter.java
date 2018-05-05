@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 public class DataAdapter extends ArrayAdapter<String> {
 
+
     private static final String[] mContacts = { "Рыжик", "Барсик", "Мурзик",
             "Мурка" };
 
