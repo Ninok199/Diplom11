@@ -14,6 +14,8 @@ import com.example.diplom11.R;
 import com.example.diplom11.WordData;
 import com.example.diplom11.Models.WordModel;
 
+import java.util.List;
+
 
 public class MainAppActivity extends AppCompatActivity {
     Intent intent;
@@ -29,7 +31,7 @@ public class MainAppActivity extends AppCompatActivity {
         presenter = new MainActivityPresenter(this);
         mSelectText = (TextView) findViewById(R.id.textView4);
         final GridView g = (GridView) findViewById(R.id.gridbuttonsview);
-        mAdapter = new DataAdapter(getApplicationContext(),
+        mAdapter = new DataAdapter(this,
                 android.R.layout.simple_list_item_1);
         g.setAdapter(mAdapter);
         g.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -40,21 +42,10 @@ public class MainAppActivity extends AppCompatActivity {
                 presenter.onItemCLick(position);
             }
         });
-
-
-//        WordModel model = new WordModel(this);
-//        model.initDB();
-//        model.addWord(new WordData("qqqq","ssss","aaaa",1,2,3));
     }
-//
-//        System.out.println("Reading all contacts..");
-//        List<WordData> contacts = db.getAllWords();
-//        for (WordData cn : contacts) {
-//            String log = cn.get_id()+cn.getEnglish()+cn.getRussian()+cn.getComplexity();
-//            System.out.print("Name: ");
-//            System.out.println(log);
-//        }
-//    }
+
+
+
 
     public void onClickConfigMenu(View view) {
 

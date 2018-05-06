@@ -21,7 +21,10 @@ public class WordModel
     public WordModel(Context c){
         this.context=c;
        db = new DataBaseHandlerImpl(c);
+        initDB();
     }
+
+
 
 
 

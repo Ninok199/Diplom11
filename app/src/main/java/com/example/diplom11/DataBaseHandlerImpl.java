@@ -10,7 +10,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 
-
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -61,16 +61,18 @@ public class DataBaseHandlerImpl extends SQLiteOpenHelper implements IDataBaseHa
     }
 
     private boolean checkDataBase() {
-        SQLiteDatabase checkDB = null;
-        try {
-            String myPath = DB_PATH + DB_NAME;
-            checkDB = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READONLY);
-        } catch (SQLiteException e) {
-        }
-        if (checkDB != null) {
-            checkDB.close();
-        }
-        return checkDB != null ? true : false;
+//        SQLiteDatabase checkDB = null;
+//        try {
+//            String myPath = DB_PATH + DB_NAME;
+//            checkDB = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READONLY);
+//        } catch (SQLiteException e) {
+//        }
+//        if (checkDB != null) {
+//            checkDB.close();
+//        }
+//        return checkDB != null ? true : false;
+        File dbFile = myContext.getDatabasePath(DB_NAME);
+        return dbFile.exists();
     }
 
     private void copyDataBase() throws IOException {
