@@ -15,21 +15,21 @@ import com.example.diplom11.R;
 
 public class MainAppActivity extends AppCompatActivity {
     Intent intent;
-    public TextView mSelectText;
+    private TextView mSelectText;
     public DataAdapter mAdapter;
     MainActivityPresenter presenter;
-
+    GridView g;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        presenter = new MainActivityPresenter(this);
-        mSelectText = (TextView) findViewById(R.id.textView4);
-        final GridView g = (GridView) findViewById(R.id.gridbuttonsview);
-        mAdapter = new DataAdapter(this,
-                android.R.layout.simple_list_item_1);
-        g.setAdapter(mAdapter);
+        presenter = new MainActivityPresenter(this,this);
+        mSelectText = findViewById(R.id.textView4);
+        g =  findViewById(R.id.gridbuttonsview);
+        setmAdapter();
+
+
         g.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
@@ -38,10 +38,18 @@ public class MainAppActivity extends AppCompatActivity {
                 presenter.onItemCLick(position);
             }
         });
+
+
     }
 
 
 
+public void setmAdapter(){
+    mAdapter = new DataAdapter(this,
+            android.R.layout.simple_list_item_1);
+              g.setAdapter(mAdapter);
+    getmSelectText().setText(mAdapter.getTextFromPresenter());
+}
 
     public void onClickConfigMenu(View view) {
 
@@ -51,5 +59,13 @@ public class MainAppActivity extends AppCompatActivity {
         finish();
 
 
+    }
+
+    public TextView getmSelectText() {
+        return mSelectText;
+    }
+
+    public void setmSelectText(TextView mSelectText) {
+        this.mSelectText = mSelectText;
     }
 }

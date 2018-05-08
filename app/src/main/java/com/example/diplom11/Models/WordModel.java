@@ -19,12 +19,13 @@ import java.util.List;
 
 public class WordModel
 {
-    //DaoSession daoSession;
-    Context context;
-    DataBaseHandlerImpl db;
+
+    private Context context;
+    private DataBaseHandlerImpl db;
     public WordModel(Context c){
+
         this.context=c;
-       db = new DataBaseHandlerImpl(c);
+        db = new DataBaseHandlerImpl(c);
         initDB();
 
 //        DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(c,"words"); //The users-db here is the name of our database.
@@ -66,11 +67,16 @@ public class WordModel
             throw sqle;
         }
     }
+
+
     public void addWord(WordData wordData){
         db.addWord(wordData);
 
     }
 
+    public WordData getRussWord (String eng){
+        return db.getColumnRussian(eng);
+    }
     public WordData getWord(int id) {
         return db.getWord(id);
     }

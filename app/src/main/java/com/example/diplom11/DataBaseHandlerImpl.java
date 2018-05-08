@@ -1,5 +1,6 @@
 package com.example.diplom11;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -19,26 +20,25 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Инна on 04.05.2018.
- */
+
 
 public class DataBaseHandlerImpl extends SQLiteOpenHelper implements IDataBaseHandler {
 
-    public final static String _ID = "_id";
-    public final static String COLUMN_ENGLISH = "english";
-    public final static String COLUMN_RUSSIAN = "russian";
-    public final static String COLUMN_TRANSCRIPTION = "transcription";
-    public final static String COLUMN_PART_SPEECH = "part_speech";
-    public final static String COLUMN_COMPLEXITY = "complexity";
-    public final static String COLUMN_WORD_CATEGORY = "word_category";
-    public final static String TABLE_NAME = "word";
-    String DB_PATH = null;
+    private final static String _ID = "_id";
+    private final static String COLUMN_ENGLISH = "english";
+    private final static String COLUMN_RUSSIAN = "russian";
+    private final static String COLUMN_TRANSCRIPTION = "transcription";
+    private final static String COLUMN_PART_SPEECH = "part_speech";
+    private final static String COLUMN_COMPLEXITY = "complexity";
+    private final static String COLUMN_WORD_CATEGORY = "word_category";
+    private final static String TABLE_NAME = "word";
+    private String DB_PATH = null;
     private static String DB_NAME = "words.db";
     private SQLiteDatabase myDataBase;
     private final Context myContext;
 
 
+    @SuppressLint("SdCardPath")
     public DataBaseHandlerImpl(Context context) {
         super(context, DB_NAME, null, 10);
         this.myContext = context;
@@ -62,16 +62,6 @@ public class DataBaseHandlerImpl extends SQLiteOpenHelper implements IDataBaseHa
     }
 
     private boolean checkDataBase() {
-//        SQLiteDatabase checkDB = null;
-//        try {
-//            String myPath = DB_PATH + DB_NAME;
-//            checkDB = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READONLY);
-//        } catch (SQLiteException e) {
-//        }
-//        if (checkDB != null) {
-//            checkDB.close();
-//        }
-//        return checkDB != null ? true : false;
         File dbFile = myContext.getDatabasePath(DB_NAME);
         return dbFile.exists();
     }
@@ -99,9 +89,7 @@ public class DataBaseHandlerImpl extends SQLiteOpenHelper implements IDataBaseHa
 
     }
 
-    public SQLiteDatabase getMyDataBase(){
-        return myDataBase;
-    }
+
 
     @Override
     public synchronized void close() {
@@ -115,11 +103,7 @@ public class DataBaseHandlerImpl extends SQLiteOpenHelper implements IDataBaseHa
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-//        String CREATE_WORD_TABLE = "CREATE TABLE " + TABLE_NAME + "("
-//                + _ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + COLUMN_ENGLISH + " TEXT,"
-//                + COLUMN_RUSSIAN + " TEXT," + COLUMN_TRANSCRIPTION + " TEXT,"+COLUMN_PART_SPEECH + " INTEGER,"
-//                +COLUMN_COMPLEXITY + " INTEGER,"+COLUMN_WORD_CATEGORY + " INTEGER" +");";
-//        sqLiteDatabase.execSQL(CREATE_WORD_TABLE);
+
 
     }
 
@@ -143,11 +127,25 @@ public class DataBaseHandlerImpl extends SQLiteOpenHelper implements IDataBaseHa
         myDataBase.close();
     }
 
+    public WordData getColumnRussian(String engword) {
+        SQLiteDatabase myDataBase = this.getReadableDatabase();
+
+        @SuppressLint("Recycle") Cursor cursor = myDataBase.query(TABLE_NAME, new String[] { _ID,COLUMN_ENGLISH,COLUMN_RUSSIAN,COLUMN_TRANSCRIPTION,COLUMN_PART_SPEECH,COLUMN_COMPLEXITY,COLUMN_WORD_CATEGORY }, COLUMN_ENGLISH + "=?",
+                new String[] { String.valueOf(engword) }, null, null, null, null);
+
+        if (cursor != null){
+            cursor.moveToFirst();
+        }
+
+        assert cursor != null;
+
+        return new WordData(cursor.getInt(0), cursor.getString(1), cursor.getString(2),cursor.getString(3),cursor.getInt(4),cursor.getInt(5),cursor.getInt(6));
+    }
     @Override
     public WordData getWord(int id) {
         SQLiteDatabase myDataBase = this.getReadableDatabase();
 
-        Cursor cursor = myDataBase.query(TABLE_NAME, new String[] { _ID,COLUMN_ENGLISH,COLUMN_RUSSIAN,COLUMN_TRANSCRIPTION,COLUMN_PART_SPEECH,COLUMN_COMPLEXITY,COLUMN_WORD_CATEGORY }, _ID + "=?",
+        @SuppressLint("Recycle") Cursor cursor = myDataBase.query(TABLE_NAME, new String[] { _ID,COLUMN_ENGLISH,COLUMN_RUSSIAN,COLUMN_TRANSCRIPTION,COLUMN_PART_SPEECH,COLUMN_COMPLEXITY,COLUMN_WORD_CATEGORY }, _ID + "=?",
                 new String[] { String.valueOf(id) }, null, null, null, null);
 
         if (cursor != null){
@@ -161,11 +159,11 @@ public class DataBaseHandlerImpl extends SQLiteOpenHelper implements IDataBaseHa
 
     @Override
     public List<WordData> getAllWords() {
-        List<WordData> wordList = new ArrayList<WordData>();
+        List<WordData> wordList = new ArrayList<>();
         String selectQuery = "SELECT  * FROM " + TABLE_NAME;
 
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(selectQuery, null);
+        @SuppressLint("Recycle") Cursor cursor = db.rawQuery(selectQuery, null);
 
         if (cursor.moveToFirst()) {
             do {
@@ -187,9 +185,10 @@ public class DataBaseHandlerImpl extends SQLiteOpenHelper implements IDataBaseHa
 
     @Override
     public int getWordsCount() {
+
         String countQuery = "SELECT  * FROM " + TABLE_NAME;
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery(countQuery, null);
+        @SuppressLint("Recycle") Cursor cursor = db.rawQuery(countQuery, null);
 
         return cursor.getCount();
     }
