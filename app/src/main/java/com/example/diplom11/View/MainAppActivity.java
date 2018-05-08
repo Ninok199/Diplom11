@@ -11,10 +11,6 @@ import android.widget.TextView;
 import com.example.diplom11.DataAdapter;
 import com.example.diplom11.Presenters.MainActivityPresenter;
 import com.example.diplom11.R;
-import com.example.diplom11.WordData;
-import com.example.diplom11.Models.WordModel;
-
-import java.util.List;
 
 
 public class MainAppActivity extends AppCompatActivity {

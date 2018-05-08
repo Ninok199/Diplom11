@@ -1,5 +1,7 @@
 package com.example.diplom11;
 
+import com.example.diplom11.Data.WordData;
+
 import java.util.List;
 
 /**

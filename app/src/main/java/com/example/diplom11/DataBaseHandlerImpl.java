@@ -5,10 +5,11 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+
+import com.example.diplom11.Data.WordData;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -98,6 +99,10 @@ public class DataBaseHandlerImpl extends SQLiteOpenHelper implements IDataBaseHa
 
     }
 
+    public SQLiteDatabase getMyDataBase(){
+        return myDataBase;
+    }
+
     @Override
     public synchronized void close() {
         if (myDataBase != null)
@@ -185,7 +190,6 @@ public class DataBaseHandlerImpl extends SQLiteOpenHelper implements IDataBaseHa
         String countQuery = "SELECT  * FROM " + TABLE_NAME;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(countQuery, null);
-        cursor.close();
 
         return cursor.getCount();
     }
