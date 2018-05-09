@@ -24,7 +24,7 @@ public class MainAppActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        presenter = new MainActivityPresenter(this,this);
+        presenter = new MainActivityPresenter(this);
         mSelectText = findViewById(R.id.textView4);
         g =  findViewById(R.id.gridbuttonsview);
         setmAdapter();
@@ -46,7 +46,7 @@ public class MainAppActivity extends AppCompatActivity {
 
 public void setmAdapter(){
     mAdapter = new DataAdapter(this,
-            android.R.layout.simple_list_item_1);
+            android.R.layout.simple_list_item_1,this);
               g.setAdapter(mAdapter);
     getmSelectText().setText(mAdapter.getTextFromPresenter());
 }

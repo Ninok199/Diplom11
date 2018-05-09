@@ -8,6 +8,8 @@ import com.example.diplom11.View.MainAppActivity;
 
 
 public class MainActivity extends AppCompatActivity {
+    public static final String APP_PREFERENCES = "mysettings";
+    public static final String APP_PREFERENCES_LEVEL_WORDS = "0";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

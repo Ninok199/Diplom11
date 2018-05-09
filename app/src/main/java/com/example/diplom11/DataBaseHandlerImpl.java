@@ -6,8 +6,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
 
 import com.example.diplom11.Data.WordData;
@@ -32,27 +32,34 @@ public class DataBaseHandlerImpl extends SQLiteOpenHelper implements IDataBaseHa
     private final static String COLUMN_COMPLEXITY = "complexity";
     private final static String COLUMN_WORD_CATEGORY = "word_category";
     private final static String TABLE_NAME = "word";
-    private String DB_PATH = null;
+    // путь к базе данных вашего приложения
+    private static String DB_PATH = "/data/data/com.example.diplom11/databases/";
     private static String DB_NAME = "words.db";
     private SQLiteDatabase myDataBase;
-    private final Context myContext;
+    private final Context mContext;
 
-
-    @SuppressLint("SdCardPath")
+    /**
+     * Конструктор
+     * Принимает и сохраняет ссылку на переданный контекст для доступа к ресурсам приложения
+     * @param context
+     */
     public DataBaseHandlerImpl(Context context) {
-        super(context, DB_NAME, null, 10);
-        this.myContext = context;
-        this.DB_PATH = "/data/data/" + context.getPackageName() + "/" + "databases/";
-        Log.e("Path 1", DB_PATH);
+        super(context, DB_NAME, null, 1);
+        this.mContext = context;
     }
 
-
-
-    public void createDataBase() throws IOException {
+    /**
+     * Создает пустую базу данных и перезаписывает ее нашей собственной базой
+     * */
+    public void createDataBase() throws IOException{
         boolean dbExist = checkDataBase();
-        if (dbExist) {
-        } else {
-            this.getReadableDatabase();
+
+        if(dbExist){
+            //ничего не делать - база уже есть
+        }else{
+            //вызывая этот метод создаем пустую базу, позже она будет перезаписана
+            this.getWritableDatabase();
+
             try {
                 copyDataBase();
             } catch (IOException e) {
@@ -61,57 +68,85 @@ public class DataBaseHandlerImpl extends SQLiteOpenHelper implements IDataBaseHa
         }
     }
 
-    private boolean checkDataBase() {
-        File dbFile = myContext.getDatabasePath(DB_NAME);
-        return dbFile.exists();
+    /**
+     * Проверяет, существует ли уже эта база, чтобы не копировать каждый раз при запуске приложения
+     * @return true если существует, false если не существует
+     */
+    private boolean checkDataBase(){
+        boolean checkdb = false;
+        try{
+            String myPath = DB_PATH + DB_NAME;
+            File dbfile = new File(myPath);
+            //checkdb = SQLiteDatabase.openDatabase(myPath,null,SQLiteDatabase.OPEN_READWRITE);
+            checkdb = dbfile.exists();
+        }
+        catch(SQLiteException e){
+            System.out.println("Database doesn't exist");
+        }
+
+        return checkdb;
     }
 
-    private void copyDataBase() throws IOException {
-        InputStream myInput = myContext.getAssets().open(DB_NAME);
+    /**
+     * Копирует базу из папки assets заместо созданной локальной БД
+     * Выполняется путем копирования потока байтов.
+     * */
+    private void copyDataBase() throws IOException{
+        //Открываем локальную БД как входящий поток
+        InputStream myInput = mContext.getAssets().open(DB_NAME);
+
+        //Путь ко вновь созданной БД
         String outFileName = DB_PATH + DB_NAME;
+
+        //Открываем пустую базу данных как исходящий поток
         OutputStream myOutput = new FileOutputStream(outFileName);
-        byte[] buffer = new byte[10];
+
+        //перемещаем байты из входящего файла в исходящий
+        byte[] buffer = new byte[1024];
         int length;
-        while ((length = myInput.read(buffer)) > 0) {
+        while ((length = myInput.read(buffer))>0){
             myOutput.write(buffer, 0, length);
         }
+
+        //закрываем потоки
         myOutput.flush();
         myOutput.close();
         myInput.close();
-
     }
 
-    public void openDataBase() throws SQLException {
+    public void openDataBase() throws SQLException{
+        //открываем БД
         String myPath = DB_PATH + DB_NAME;
-        myDataBase = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READONLY);
-
-
-
+        myDataBase = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READWRITE);
     }
-
-
 
     @Override
     public synchronized void close() {
-        if (myDataBase != null)
+        if(myDataBase != null)
             myDataBase.close();
         super.close();
     }
 
-
-
-
     @Override
-    public void onCreate(SQLiteDatabase sqLiteDatabase) {
+    public void onCreate(SQLiteDatabase db) {
 
-
+        db.execSQL("CREATE TABLE IF NOT EXISTS"  + "\"word\" (" + //
+                "\"_id\" INTEGER PRIMARY KEY AUTOINCREMENT," + // 0: _id
+                "\"english\" TEXT," + // 1: english
+                "\"russian\" TEXT," + // 2: russian
+                "\"transcription\" TEXT," + // 3: transcription
+                "\"part_speech\" INTEGER NOT NULL ," + // 4: part_speech
+                "\"complexity\" INTEGER NOT NULL ," + // 5: complexity
+                "\"word_category\" INTEGER NOT NULL );"); // 6: word_category);
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
-        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
-        onCreate(sqLiteDatabase);
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        File file = new File(DB_PATH+DB_NAME);
+        if (file.exists() && !file.isDirectory())
+            file.setWritable(true);
     }
+
 
     @Override
     public void addWord(WordData word) {
@@ -144,9 +179,9 @@ public class DataBaseHandlerImpl extends SQLiteOpenHelper implements IDataBaseHa
     @Override
     public WordData getWord(int id) {
         SQLiteDatabase myDataBase = this.getReadableDatabase();
-
-        @SuppressLint("Recycle") Cursor cursor = myDataBase.query(TABLE_NAME, new String[] { _ID,COLUMN_ENGLISH,COLUMN_RUSSIAN,COLUMN_TRANSCRIPTION,COLUMN_PART_SPEECH,COLUMN_COMPLEXITY,COLUMN_WORD_CATEGORY }, _ID + "=?",
-                new String[] { String.valueOf(id) }, null, null, null, null);
+        Cursor cursor;
+                cursor = myDataBase.query(TABLE_NAME, new String[]{_ID, COLUMN_ENGLISH, COLUMN_RUSSIAN, COLUMN_TRANSCRIPTION, COLUMN_PART_SPEECH, COLUMN_COMPLEXITY, COLUMN_WORD_CATEGORY}, _ID + "=?",
+                        new String[]{String.valueOf(id)}, null, null, null, null);
 
         if (cursor != null){
             cursor.moveToFirst();
@@ -183,14 +218,65 @@ public class DataBaseHandlerImpl extends SQLiteOpenHelper implements IDataBaseHa
         return wordList;
     }
 
+    @SuppressLint("Recycle")
+    public List<WordData> getComplexity (String complexity){
+        List<WordData> data  = new ArrayList<>();
+        SQLiteDatabase myDataBase = this.getReadableDatabase();
+        Cursor cursor;
+        if(complexity.equals("1")||complexity.equals("2")||complexity.equals("3")) {
+            cursor = myDataBase.query(TABLE_NAME, new String[]{_ID, COLUMN_ENGLISH, COLUMN_RUSSIAN, COLUMN_TRANSCRIPTION, COLUMN_PART_SPEECH, COLUMN_COMPLEXITY, COLUMN_WORD_CATEGORY}, COLUMN_COMPLEXITY + "=?",
+                    new String[]{complexity}, null, null, null, null);
+
+            if (cursor.moveToFirst()) {
+                do {
+                    WordData word = new WordData();
+                    word.set_id(cursor.getInt(0));
+                    word.setEnglish(cursor.getString(1));
+                    word.setRussian(cursor.getString(2));
+                    word.setTranscription(cursor.getString(3));
+                    word.setPart_speech(cursor.getInt(4));
+                    word.setComplexity(cursor.getInt(5));
+                    word.setWord_category(cursor.getInt(6));
+
+                    data.add(word);
+                } while (cursor.moveToNext());
+            }
+        }
+        else if(complexity.equals("0")){
+            data=getAllWords();
+        }
+        return data;
+    }
+    @SuppressLint("Recycle")
     @Override
-    public int getWordsCount() {
+    public int getWordsCount(int flag) {
+        String countQuery = null;
+        myDataBase = this.getReadableDatabase();
+        Cursor cursor;
+        int count = 0;
+        if (flag==0) {
 
-        String countQuery = "SELECT  * FROM " + TABLE_NAME;
-        SQLiteDatabase db = this.getReadableDatabase();
-        @SuppressLint("Recycle") Cursor cursor = db.rawQuery(countQuery, null);
+            countQuery = "SELECT  * FROM " + TABLE_NAME;
+            cursor = myDataBase.rawQuery(countQuery, null);
+            if (cursor != null) {
+                cursor.moveToFirst();
+            }
+            assert cursor != null;
+            count = cursor.getCount();
+        }
+            else{
 
-        return cursor.getCount();
+                cursor = myDataBase.query(TABLE_NAME, new String[]{_ID, COLUMN_ENGLISH, COLUMN_RUSSIAN, COLUMN_TRANSCRIPTION, COLUMN_PART_SPEECH, COLUMN_COMPLEXITY, COLUMN_WORD_CATEGORY}, COLUMN_COMPLEXITY + "=?",
+                        new String[]{String.valueOf(flag)}, null, null, null, null);
+                if (cursor != null) {
+                    cursor.moveToFirst();
+                }
+                assert cursor != null;
+                count = cursor.getCount();
+
+        }
+
+                return count;
     }
 
     @Override

@@ -2,18 +2,18 @@ package com.example.diplom11;
 
 import com.example.diplom11.Data.WordData;
 
+import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Инна on 04.05.2018.
- */
+
 
 public interface IDataBaseHandler {
-    public void addWord(WordData word);
-    public WordData getWord(int id);
-    public List<WordData> getAllWords();
-    public int getWordsCount();
-    public int updateWord(WordData word);
-    public void deleteWord(WordData word);
-    public void deleteAll();
+     void addWord(WordData word);
+     WordData getWord(int id);
+    List<WordData> getAllWords();
+    int getWordsCount(int flag);
+    int updateWord(WordData word);
+     void deleteWord(WordData word);
+     void deleteAll();
+   List <WordData> getComplexity(String complexity);
 }

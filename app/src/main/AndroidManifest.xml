@@ -9,6 +9,7 @@
         android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
     <application
+
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -27,7 +28,6 @@
         <activity android:name=".View.ChoiceModeActivity"></activity>
         <activity android:name=".View.ChangeViewActivity"></activity>
         <activity android:name=".View.MainAppActivity"></activity>
-
 
     </application>
 

@@ -7,6 +7,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.example.diplom11.Presenters.MainActivityPresenter;
+import com.example.diplom11.View.MainAppActivity;
 
 import java.util.ArrayList;
 
@@ -25,11 +26,11 @@ public class DataAdapter extends ArrayAdapter<String> {
     MainActivityPresenter presenter;
 
     // Конструктор
-    public DataAdapter(Context context, int textViewResourceId) {
+    public DataAdapter(Context context, int textViewResourceId, MainAppActivity activity) {
         super(context, textViewResourceId, mContacts);
         // TODO Auto-generated constructor stub
         this.mContext = context;
-        presenter = new MainActivityPresenter(context);
+        presenter = new MainActivityPresenter(activity);
         initItems();
 
 

@@ -3,14 +3,13 @@ package com.example.diplom11.Models;
 import android.content.Context;
 import android.database.SQLException;
 
-import com.example.diplom11.Data.DaoMaster;
 import com.example.diplom11.Data.DaoSession;
 import com.example.diplom11.DataBaseHandlerImpl;
 import com.example.diplom11.Data.WordData;
-
-import org.greenrobot.greendao.database.Database;
+import com.example.diplom11.MyApplication;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -28,23 +27,17 @@ public class WordModel
         db = new DataBaseHandlerImpl(c);
         initDB();
 
-//        DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(c,"words"); //The users-db here is the name of our database.
-//        Database db = helper.getWritableDb();
-//        daoSession = new DaoMaster(db).newSession();
 
-//        db.addWord(new WordData("s1ss","ssss","dddd",1,2,3));
-//        db.addWord(new WordData("ss2s","ssss","dddd",1,2,3));
-//        db.addWord(new WordData("s3ss","ssss","dddd",1,2,3));
-//        db.addWord(new WordData("s4ss","ssss","dddd",1,2,3));
-//        db.addWord(new WordData("s5ss","ssss","dddd",1,2,3));
-//        db.addWord(new WordData("s6ss","ssss","dddd",1,2,3));
-//        db.addWord(new WordData("s7ss","ssss","dddd",1,2,3));
-//        db.addWord(new WordData("s8ss","ssss","dddd",1,2,3));
-//        db.addWord(new WordData("s9ss","ssss","dddd",1,2,3));
-//        db.addWord(new WordData("s10ss","ssss","dddd",1,2,3));
-//        for (int i=1;i<20;i++){
-//            System.out.println(db.getWord(i).getEnglish());
-       // }
+//        db.addWord(new WordData("s11ss","sss11s","dddd",1,2,3));
+//        db.addWord(new WordData("ss12s","ss12ss","dddd",1,2,3));
+//        db.addWord(new WordData("s13ss","s13sss","dddd",1,2,3));
+//        db.addWord(new WordData("s14ss","sss14s","dddd",1,2,3));
+//        db.addWord(new WordData("s15ss","s15sss","dddd",1,2,3));
+//        db.addWord(new WordData("s16ss","ss16ss","dddd",1,2,3));
+//        db.addWord(new WordData("s17ss","s17sss","dddd",1,2,3));
+//        db.addWord(new WordData("s18ss","s18sss","dddd",1,2,3));
+//        db.addWord(new WordData("s19ss","ss19ss","dddd",1,2,3));
+//        db.addWord(new WordData("s20ss","s20sss","dddd",1,2,3));
 
 
 
@@ -85,8 +78,8 @@ public class WordModel
         return db.getAllWords();
     }
 
-    public int getWordsCount() {
-        return db.getWordsCount();
+    public int getWordsCount(int flag) {
+        return db.getWordsCount(flag);
     }
 
     public int updateWord(WordData word) {
@@ -95,5 +88,9 @@ public class WordModel
 
     public void deleteWord(WordData word) {
         db.deleteWord(word);
+    }
+
+    public List<WordData> getComplexity(String complexity){
+        return db.getComplexity(complexity);
     }
 }

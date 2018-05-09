@@ -39,6 +39,7 @@
         android:layout_marginStart="72dp"
         android:layout_marginTop="183dp"
         android:text="@string/save"
+        android:onClick="onSaveClick"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imageButtonChoiceLevels"

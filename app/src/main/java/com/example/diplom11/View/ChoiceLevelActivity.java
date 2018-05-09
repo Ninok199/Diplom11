@@ -14,8 +14,8 @@ import com.example.diplom11.R;
 
 
 public class ChoiceLevelActivity extends AppCompatActivity {
-    ListView menu;
-    BasePresenter presenter;
+    public ListView menu;
+    ChoiceLevelPresenterImpl presenter;
 
 
     @Override
@@ -41,5 +41,9 @@ public class ChoiceLevelActivity extends AppCompatActivity {
         presenter.onBackClick();
 
 
+    }
+
+    public void onSaveClick(View view) {
+        presenter.onButtonSave();
     }
 }
