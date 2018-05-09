@@ -78,7 +78,7 @@ public class WordModel
         return db.getAllWords();
     }
 
-    public int getWordsCount(int flag) {
+    public int getWordsCount(String flag) {
         return db.getWordsCount(flag);
     }
 

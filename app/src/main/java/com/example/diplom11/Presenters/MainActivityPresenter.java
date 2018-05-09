@@ -79,7 +79,7 @@ public class MainActivityPresenter implements BasePresenter {
         random=new Random();
         while (count!=4) {
 
-            int r = random.nextInt(model.getWordsCount(Integer.parseInt(complex)));
+            int r = random.nextInt(model.getWordsCount(complex));
             integers.add(complexities.get(r));
             count++;
             if (count >= 2) {
@@ -116,7 +116,7 @@ public class MainActivityPresenter implements BasePresenter {
 
     public ArrayList<Integer> getComplexityWord(String complexity){
         complexities = new ArrayList<>();
-        for(int i = 0; i<model.getWordsCount(Integer.parseInt(complexity)); i++){
+        for(int i = 0; i<model.getWordsCount(complexity); i++){
             int k = (int) model.getComplexity(complexity).get(i).get_id();
             complexities.add(k);
 

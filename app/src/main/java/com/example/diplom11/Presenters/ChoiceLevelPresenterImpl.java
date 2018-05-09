@@ -33,23 +33,26 @@ public class ChoiceLevelPresenterImpl implements BasePresenter {
 
     @Override
     public void onItemCLick(int position) {
-        if (position == 0 || position == 1 || position == 2) {
-            System.out.println(position);
 
         }
-    }
+
 
 
     public void onButtonSave(){
+        int key=0;
         SparseBooleanArray a =activity.menu.getCheckedItemPositions();
-        for(int i=0;i<a.size();i++){
-            int key = a.keyAt(i);
-            SharedPreferences.Editor editor = mSettings.edit();
-            editor.putString(MainActivity.APP_PREFERENCES_LEVEL_WORDS, String.valueOf(key+1));
-            editor.apply();
+        for(int i=0;i<a.size();i++) {
+            key += a.keyAt(i)+2;
 
         }
-
+            SharedPreferences.Editor editor = mSettings.edit();
+            if(key==9) {
+                editor.putString(MainActivity.APP_PREFERENCES_LEVEL_WORDS, String.valueOf(0));
+            }
+            else
+                editor.putString(MainActivity.APP_PREFERENCES_LEVEL_WORDS, String.valueOf(key));
+            editor.apply();
+            activity.finish();
     }
 
 

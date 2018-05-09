@@ -11,7 +11,7 @@ public interface IDataBaseHandler {
      void addWord(WordData word);
      WordData getWord(int id);
     List<WordData> getAllWords();
-    int getWordsCount(int flag);
+    int getWordsCount(String flag);
     int updateWord(WordData word);
      void deleteWord(WordData word);
      void deleteAll();

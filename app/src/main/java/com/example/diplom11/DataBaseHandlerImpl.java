@@ -218,14 +218,55 @@ public class DataBaseHandlerImpl extends SQLiteOpenHelper implements IDataBaseHa
         return wordList;
     }
 
+    private ArrayList<String>switchComplexity(String complexity){
+        ArrayList<String> list = new ArrayList<>();
+        System.out.println(complexity);
+        switch (complexity) {
+            case "2":
+                list.add(0,"1");
+                list.add(1,"0");
+                break;
+            case "3":
+                list.add(0,"2");
+                list.add(1,"0");
+                break;
+            case "4":
+                list.add(0,"3");
+                list.add(1,"0");
+                break;
+            case "5":
+                list.add(0,"1");
+                list.add(1,"2");
+                break;
+            case "6":
+                list.add(0,"1");
+                list.add(1,"3");
+                break;
+            case "7":
+                list.add(0,"2");
+                list.add(1,"3");
+                break;
+            default:
+                list.add(0,"0");
+                list.add(1,"0");
+                break;
+        }
+        return list;
+    }
+
     @SuppressLint("Recycle")
     public List<WordData> getComplexity (String complexity){
+        String value1=switchComplexity(complexity).get(0);
+        String value2=switchComplexity(complexity).get(1);
+        System.out.println(value1 + "  "+value2+"gC");
+
+
         List<WordData> data  = new ArrayList<>();
         SQLiteDatabase myDataBase = this.getReadableDatabase();
         Cursor cursor;
-        if(complexity.equals("1")||complexity.equals("2")||complexity.equals("3")) {
+        if(complexity.equals("2")||complexity.equals("3")||complexity.equals("4")) {
             cursor = myDataBase.query(TABLE_NAME, new String[]{_ID, COLUMN_ENGLISH, COLUMN_RUSSIAN, COLUMN_TRANSCRIPTION, COLUMN_PART_SPEECH, COLUMN_COMPLEXITY, COLUMN_WORD_CATEGORY}, COLUMN_COMPLEXITY + "=?",
-                    new String[]{complexity}, null, null, null, null);
+                    new String[]{value1}, null, null, null, null);
 
             if (cursor.moveToFirst()) {
                 do {
@@ -245,16 +286,40 @@ public class DataBaseHandlerImpl extends SQLiteOpenHelper implements IDataBaseHa
         else if(complexity.equals("0")){
             data=getAllWords();
         }
+
+        else if(complexity.equals("5")||complexity.equals("6")||complexity.equals("7")){
+            cursor = myDataBase.query(TABLE_NAME, new String[]{_ID, COLUMN_ENGLISH, COLUMN_RUSSIAN, COLUMN_TRANSCRIPTION, COLUMN_PART_SPEECH, COLUMN_COMPLEXITY, COLUMN_WORD_CATEGORY}, COLUMN_COMPLEXITY + "=? or "+ COLUMN_COMPLEXITY+" =?",
+                    new String[]{value1,value2}, null, null, null, null);
+
+            if (cursor.moveToFirst()) {
+                do {
+                    WordData word = new WordData();
+                    word.set_id(cursor.getInt(0));
+                    word.setEnglish(cursor.getString(1));
+                    word.setRussian(cursor.getString(2));
+                    word.setTranscription(cursor.getString(3));
+                    word.setPart_speech(cursor.getInt(4));
+                    word.setComplexity(cursor.getInt(5));
+                    word.setWord_category(cursor.getInt(6));
+
+                    data.add(word);
+                } while (cursor.moveToNext());
+            }
+
+        }
         return data;
     }
     @SuppressLint("Recycle")
     @Override
-    public int getWordsCount(int flag) {
+    public int getWordsCount(String flag) {
         String countQuery = null;
         myDataBase = this.getReadableDatabase();
         Cursor cursor;
         int count = 0;
-        if (flag==0) {
+        String value1=switchComplexity(flag).get(0);
+        String value2=switchComplexity(flag).get(1);
+        System.out.println(value1 + "  "+value2+"wc");
+        if(flag.equals("0")) {
 
             countQuery = "SELECT  * FROM " + TABLE_NAME;
             cursor = myDataBase.rawQuery(countQuery, null);
@@ -264,10 +329,10 @@ public class DataBaseHandlerImpl extends SQLiteOpenHelper implements IDataBaseHa
             assert cursor != null;
             count = cursor.getCount();
         }
-            else{
+        else if(flag.equals("2")||flag.equals("3")||flag.equals("4")){
 
                 cursor = myDataBase.query(TABLE_NAME, new String[]{_ID, COLUMN_ENGLISH, COLUMN_RUSSIAN, COLUMN_TRANSCRIPTION, COLUMN_PART_SPEECH, COLUMN_COMPLEXITY, COLUMN_WORD_CATEGORY}, COLUMN_COMPLEXITY + "=?",
-                        new String[]{String.valueOf(flag)}, null, null, null, null);
+                        new String[]{value1}, null, null, null, null);
                 if (cursor != null) {
                     cursor.moveToFirst();
                 }
@@ -275,6 +340,16 @@ public class DataBaseHandlerImpl extends SQLiteOpenHelper implements IDataBaseHa
                 count = cursor.getCount();
 
         }
+        else if(flag.equals("5")||flag.equals("6")||flag.equals("7")){
+            cursor = myDataBase.query(TABLE_NAME, new String[]{_ID, COLUMN_ENGLISH, COLUMN_RUSSIAN, COLUMN_TRANSCRIPTION, COLUMN_PART_SPEECH, COLUMN_COMPLEXITY, COLUMN_WORD_CATEGORY}, COLUMN_COMPLEXITY + "=? or "+ COLUMN_COMPLEXITY+ "  =?",
+                    new String[]{value1,value2}, null, null, null, null);
+            if (cursor != null) {
+                cursor.moveToFirst();
+            }
+            assert cursor != null;
+            count = cursor.getCount();
+        }
+
 
                 return count;
     }
