@@ -32,8 +32,10 @@ public class ConfigPresenterImpl implements BasePresenter {
                 break;
             case 1:
                 activity.openActivity(ChoiceModeActivity.class);
+                break;
             case 4:
               activity.openActivity(ChangeViewActivity.class);
+                break;
         }
     }
 }
