@@ -28,12 +28,7 @@ public class WordModel
         initDB();
 
 
-
-
     }
-
-
-
 
 
     public void initDB(){

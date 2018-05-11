@@ -10,6 +10,7 @@ import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 
 
+import com.example.diplom11.Data.StatisticData;
 import com.example.diplom11.Data.WordData;
 
 import java.io.File;
@@ -23,7 +24,7 @@ import java.util.List;
 
 
 public class DataBaseHandlerImpl extends SQLiteOpenHelper implements IDataBaseHandler {
-
+//word
     private final static String _ID = "_id";
     private final static String COLUMN_ENGLISH = "english";
     private final static String COLUMN_RUSSIAN = "russian";
@@ -32,6 +33,13 @@ public class DataBaseHandlerImpl extends SQLiteOpenHelper implements IDataBaseHa
     private final static String COLUMN_COMPLEXITY = "complexity";
     private final static String COLUMN_WORD_CATEGORY = "word_category";
     private final static String TABLE_NAME = "word";
+
+    //statistic
+    private final static String TABLE_NAME_STATISTICS = "statistics";
+    private final static String _ID_STATISTIC = "_id_statistics";
+    private final static String _ID_WORD = "_id_word";
+    private final static String CORRECT_ANSWER = "correct_answer";
+    private final static String DATE_ANSWER = "date_answer";
     // путь к базе данных вашего приложения
     private static String DB_PATH = "/data/data/com.example.diplom11/databases/";
     private static String DB_NAME = "words.db";
@@ -138,6 +146,11 @@ public class DataBaseHandlerImpl extends SQLiteOpenHelper implements IDataBaseHa
                 "\"part_speech\" INTEGER NOT NULL ," + // 4: part_speech
                 "\"complexity\" INTEGER NOT NULL ," + // 5: complexity
                 "\"word_category\" INTEGER NOT NULL );"); // 6: word_category);
+
+        db.execSQL("CREATE TABLE IF NOT EXISTS "+ TABLE_NAME_STATISTICS + "(" + _ID_STATISTIC + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+               _ID_WORD + " INTEGER NOT NULL ," + // 5: complexity
+                CORRECT_ANSWER+ " INTEGER NOT NULL, "+
+                DATE_ANSWER +" TEXT );"); // 6: word_category););
     }
 
     @Override
@@ -176,6 +189,10 @@ public class DataBaseHandlerImpl extends SQLiteOpenHelper implements IDataBaseHa
 
         return new WordData(cursor.getInt(0), cursor.getString(1), cursor.getString(2),cursor.getString(3),cursor.getInt(4),cursor.getInt(5),cursor.getInt(6));
     }
+
+
+
+
     @Override
     public WordData getWord(int id) {
         SQLiteDatabase myDataBase = this.getReadableDatabase();
@@ -307,6 +324,85 @@ public class DataBaseHandlerImpl extends SQLiteOpenHelper implements IDataBaseHa
         }
         return data;
     }
+
+    @Override
+    public StatisticData getStatistic(int id) {
+        SQLiteDatabase myDataBase = this.getReadableDatabase();
+        Cursor cursor;
+        cursor = myDataBase.query(TABLE_NAME_STATISTICS, new String[]{_ID_STATISTIC, _ID_WORD, CORRECT_ANSWER, DATE_ANSWER}, _ID_STATISTIC + "=?",
+                new String[]{String.valueOf(id)}, null, null, null, null);
+
+        if (cursor != null){
+            cursor.moveToFirst();
+        }
+
+        assert cursor != null;
+
+        return new StatisticData(cursor.getInt(0), cursor.getInt(1), cursor.getInt(2),cursor.getString(3));
+
+    }
+
+    @Override
+    public List<StatisticData> getAllStatistic() {
+        List<StatisticData> wordList = new ArrayList<>();
+        String selectQuery = "SELECT  * FROM " + TABLE_NAME_STATISTICS;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        @SuppressLint("Recycle") Cursor cursor = db.rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                StatisticData statisticData = new StatisticData();
+               statisticData.set_id_statistics(cursor.getInt(0));
+               statisticData.set_idWord(cursor.getInt(1));
+               statisticData.setCorrectAnswer(cursor.getInt(2));
+               statisticData.setDateAnswer(cursor.getString(3));
+
+                wordList.add(statisticData);
+            } while (cursor.moveToNext());
+        }
+
+        return wordList;
+    }
+
+    @Override
+    public List<StatisticData> getStatisticData(String date) {
+        List<StatisticData> data  = new ArrayList<>();
+        SQLiteDatabase myDataBase = this.getReadableDatabase();
+        Cursor cursor;
+            cursor = myDataBase.query(TABLE_NAME_STATISTICS, new String[]{_ID_STATISTIC, _ID_WORD, CORRECT_ANSWER, DATE_ANSWER}, DATE_ANSWER + "=?",
+                    new String[]{date}, null, null, null, null);
+
+            if (cursor.moveToFirst()) {
+                do {
+                    StatisticData statisticData = new StatisticData();
+                    statisticData.set_id_statistics(cursor.getInt(0));
+                    statisticData.set_idWord(cursor.getInt(1));
+                    statisticData.setCorrectAnswer(cursor.getInt(2));
+                    statisticData.setDateAnswer(cursor.getString(3));
+
+                    data.add(statisticData);
+                } while (cursor.moveToNext());
+            }
+
+        return data;
+    }
+
+    @Override
+    public int getStatisticCount() {
+        myDataBase = this.getReadableDatabase();
+        Cursor cursor;
+        int count = 0;
+          String  countQuery = "SELECT  * FROM " + TABLE_NAME_STATISTICS;
+            cursor = myDataBase.rawQuery(countQuery, null);
+            if (cursor != null) {
+                cursor.moveToFirst();
+            }
+            assert cursor != null;
+            count = cursor.getCount();
+        return count;
+    }
+
     @SuppressLint("Recycle")
     @Override
     public int getWordsCount(String flag) {

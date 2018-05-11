@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.util.SparseBooleanArray;
 
 import com.example.diplom11.MainActivity;
+import com.example.diplom11.Models.StatisticModel;
 import com.example.diplom11.Models.WordModel;
 import com.example.diplom11.View.ChoiceLevelActivity;
 
@@ -15,6 +16,7 @@ public class ChoiceLevelPresenterImpl implements BasePresenter {
     private ChoiceLevelActivity activity;
     private WordModel model;
    SharedPreferences mSettings;
+    StatisticModel modell;
 
 
 
@@ -23,11 +25,13 @@ public class ChoiceLevelPresenterImpl implements BasePresenter {
         model = new WordModel(activity);
         mSettings = activity.getSharedPreferences(MainActivity.APP_PREFERENCES, Context.MODE_PRIVATE);
 
+        modell = new StatisticModel(activity);
     }
 
     @Override
     public void onBackClick() {
         activity.finish();
+        System.out.println(modell.getStatisticCount());
 
     }
 
