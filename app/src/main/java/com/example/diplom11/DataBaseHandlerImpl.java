@@ -258,8 +258,6 @@ public class DataBaseHandlerImpl extends SQLiteOpenHelper implements IDataBaseHa
     public List<WordData> getComplexity (String complexity){
         String value1=switchComplexity(complexity).get(0);
         String value2=switchComplexity(complexity).get(1);
-        System.out.println(value1 + "  "+value2+"gC");
-
 
         List<WordData> data  = new ArrayList<>();
         SQLiteDatabase myDataBase = this.getReadableDatabase();
@@ -318,7 +316,6 @@ public class DataBaseHandlerImpl extends SQLiteOpenHelper implements IDataBaseHa
         int count = 0;
         String value1=switchComplexity(flag).get(0);
         String value2=switchComplexity(flag).get(1);
-        System.out.println(value1 + "  "+value2+"wc");
         if(flag.equals("0")) {
 
             countQuery = "SELECT  * FROM " + TABLE_NAME;

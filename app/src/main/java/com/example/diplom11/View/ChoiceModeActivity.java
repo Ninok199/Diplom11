@@ -17,7 +17,8 @@ import com.example.diplom11.R;
 
 public class ChoiceModeActivity extends AppCompatActivity{
     ListView menu;
-    BasePresenter presenter;
+    ChoiceModePresenterImpl presenter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +41,10 @@ public class ChoiceModeActivity extends AppCompatActivity{
 
     public void onBackClick(View view){
         presenter.onBackClick();
+    }
+
+    public void onSaveClick(View view) {
+        presenter.onSaveClick();
     }
 }
 
