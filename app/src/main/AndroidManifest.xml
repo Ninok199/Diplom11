@@ -28,6 +28,7 @@
         <activity android:name=".View.ChoiceModeActivity"></activity>
         <activity android:name=".View.ChangeViewActivity"></activity>
         <activity android:name=".View.MainAppActivity"></activity>
+        <activity android:name=".View.WordTranslateActivity"></activity>
 
     </application>
 

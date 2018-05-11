@@ -39,10 +39,6 @@ public class MainActivityPresenter implements BasePresenter {
 
     }
 
-//    public MainActivityPresenter(Context c){
-//     this.context=c;
-//     model = new WordModel(c);
-//    }
 
 
 

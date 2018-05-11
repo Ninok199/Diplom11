@@ -28,17 +28,6 @@ public class WordModel
         initDB();
 
 
-//        db.addWord(new WordData("s11ss","sss11s","dddd",1,2,3));
-//        db.addWord(new WordData("ss12s","ss12ss","dddd",1,2,3));
-//        db.addWord(new WordData("s13ss","s13sss","dddd",1,2,3));
-//        db.addWord(new WordData("s14ss","sss14s","dddd",1,2,3));
-//        db.addWord(new WordData("s15ss","s15sss","dddd",1,2,3));
-//        db.addWord(new WordData("s16ss","ss16ss","dddd",1,2,3));
-//        db.addWord(new WordData("s17ss","s17sss","dddd",1,2,3));
-//        db.addWord(new WordData("s18ss","s18sss","dddd",1,2,3));
-//        db.addWord(new WordData("s19ss","ss19ss","dddd",1,2,3));
-//        db.addWord(new WordData("s20ss","s20sss","dddd",1,2,3));
-
 
 
     }
