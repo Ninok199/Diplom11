@@ -1,3 +1,65 @@
 <resources>
     <string name="app_name">Diplom1.1</string>
+    <string name="save">сохранить</string>
+    <string name="configuration">Настройки</string>
+    <string name="change_level">Выбор уровня</string>
+    <string name="change_mode">Переключение режима</string>
+    <string name="statistic">Статистика</string>
+    <string name="vocabulary">Словарь</string>
+    <string name="about_app">О программе</string>
+    <string name="view">Отображение</string>
+    <string name="about_app_info">Очень крутой текст. Прям очень крутой. Немного кракзябр: пипьтюишеитьфжылх
+    збипикшпрщкзугпз
+    оихы
+    хкхплдаьфирпкпозкрхкрлажтиыдтрлеьдрв
+    хы</string>
+    <string name="cancel">назад</string>
+    <string name="change_color">Выберите цвет фона</string>
+    <string name="change_font">Выберите стиль шрифта</string>
+    <string name="off_app_title">Временно отключить приложение</string>
+    <string-array name="itemsOfMenu">
+        <item>"Выбор уровня"</item>
+        <item>"Переключение режима"</item>
+        <item>"Статистика"</item>
+        <item>"Словарь"</item>
+        <item>"Отображение"</item>
+        <item>"Временно отключить"</item>
+        <item>"О программе"</item>
+    </string-array>
+    <string-array name="itemsOfChoiceLevels">
+        <item>"Для начинающих"</item>
+        <item>"Средний уровень"</item>
+        <item>"Продвинутый уровень"</item>
+    </string-array>
+    <string-array name="itemsOfChoiceMode">
+        <item>"Вопрос-ответ"</item>
+        <item>"Слово-перевод"</item>
+    </string-array>
+
+    <string-array name="itemsOfViewMenu">
+        <item>"Изменение цвета фона"</item>
+        <item>"Изменение стиль шрифта"</item>
+    </string-array>
+
+    <string-array name="itemsOfColors">
+        <item>Красный</item>
+        <item>Синий</item>
+        <item>Зеленый</item>
+        <item>Желтый</item>
+    </string-array>
+
+    <string-array name="itemsOfFonts">
+        <item>Обычный</item>
+        <item>Полужирный</item>
+        <item>Курсив</item>
+        <item>Полужирный+Курсив</item>
+    </string-array>
+
+    <string-array name="itemsOfTimeOffMenu">
+        <item>Всегда показывать</item>
+        <item>Не показывать 10 мин</item>
+        <item>Не показывать 1 час</item>
+        <item>Не показывать 3 часа</item>
+        <item>Не показывать сегодня</item>
+    </string-array>
 </resources>
