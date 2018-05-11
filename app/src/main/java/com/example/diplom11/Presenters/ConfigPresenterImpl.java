@@ -6,7 +6,7 @@ import com.example.diplom11.View.ChangeViewActivity;
 import com.example.diplom11.View.ChoiceLevelActivity;
 import com.example.diplom11.View.ChoiceModeActivity;
 import com.example.diplom11.View.ConfigurationActivity;
-
+import com.example.diplom11.View.VocabularyActivity;
 
 
 public class ConfigPresenterImpl implements BasePresenter {
@@ -35,6 +35,9 @@ public class ConfigPresenterImpl implements BasePresenter {
                 break;
             case 4:
               activity.openActivity(ChangeViewActivity.class);
+                break;
+            case 3:
+                activity.openActivity(VocabularyActivity.class);
                 break;
         }
     }
