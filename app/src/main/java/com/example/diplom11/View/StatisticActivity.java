@@ -40,9 +40,6 @@ TextView noStudyWordCount;
 
     }
 
-    public void onWeekStatisticClick(View view) {
-
-    }
 
 
     public void onAllTimeStatisticClick(View view) {
@@ -50,7 +47,7 @@ TextView noStudyWordCount;
         correctAnswerView.setText("CorrectAnswer: "+ presenter.getCorrectAnswer(3));
         incorrectAnswer.setText("NO coreect: "+presenter.getIncorrectAnswer(3));
         studyCount.setText("study words: " +presenter.getStudyWords(3));
-        noStudyWordCount.setText("no study" + presenter.getNoStudyWords(3));
+
     }
 
     public void OnBackClick(View view) {
@@ -62,6 +59,6 @@ TextView noStudyWordCount;
         correctAnswerView.setText("CorrectAnswer: "+ presenter.getCorrectAnswer(1));
         incorrectAnswer.setText("NO coreect: "+presenter.getIncorrectAnswer(1));
         studyCount.setText("study words: " +presenter.getStudyWords(1));
-        noStudyWordCount.setText("no study" + presenter.getNoStudyWords(1));
+
     }
 }

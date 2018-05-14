@@ -10,30 +10,16 @@
         android:id="@+id/textView7"
         android:layout_width="246dp"
         android:layout_height="30dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="52dp"
         android:layout_marginEnd="51dp"
         android:layout_marginStart="87dp"
         android:layout_marginTop="16dp"
         android:text="Statistic"
-        app:layout_constraintBottom_toTopOf="@+id/buttonWeek"
+        app:layout_constraintBottom_toTopOf="@+id/textViewCorrectAnswer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/buttonWeek"
-        android:layout_width="88dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:layout_marginEnd="28dp"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="20dp"
-        android:onClick="onWeekStatisticClick"
-        android:text="Week"
-        app:layout_constraintBottom_toTopOf="@+id/textViewCorrectAnswer"
-        app:layout_constraintEnd_toStartOf="@+id/buttonAllTime"
-        app:layout_constraintStart_toEndOf="@+id/buttonDay"
-        app:layout_constraintTop_toBottomOf="@+id/textView7" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="spread_inside" />
 
     <Button
         android:id="@+id/buttonAllTime"
@@ -41,28 +27,20 @@
         android:layout_height="48dp"
         android:layout_marginBottom="99dp"
         android:layout_marginEnd="2dp"
-        android:layout_marginStart="14dp"
         android:layout_marginTop="20dp"
         android:onClick="onAllTimeStatisticClick"
         android:text="All Time"
         app:layout_constraintBottom_toTopOf="@+id/textViewNoCorrectAnswer"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/buttonWeek"
         app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
     <TextView
         android:id="@+id/textViewCorrectAnswer"
         android:layout_width="292dp"
         android:layout_height="26dp"
-        android:layout_marginBottom="13dp"
-        android:layout_marginEnd="76dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="31dp"
         android:text="Correct Answer :"
-        app:layout_constraintBottom_toTopOf="@+id/textViewNoCorrectAnswer"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonWeek" />
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="169dp" />
 
     <TextView
         android:id="@+id/textViewNoCorrectAnswer"
@@ -82,29 +60,13 @@
         android:id="@+id/textViewBestCategory"
         android:layout_width="289dp"
         android:layout_height="29dp"
-        android:layout_marginBottom="15dp"
         android:layout_marginEnd="79dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="17dp"
         android:text="Best Category:"
-        app:layout_constraintBottom_toTopOf="@+id/textViewWorstCategory"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewNoCorrectAnswer" />
-
-    <TextView
-        android:id="@+id/textViewWorstCategory"
-        android:layout_width="293dp"
-        android:layout_height="27dp"
-        android:layout_marginBottom="156dp"
-        android:layout_marginEnd="75dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="15dp"
-        android:text="WorstCategory"
-        app:layout_constraintBottom_toTopOf="@+id/backButt"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewBestCategory" />
 
     <ImageButton
         android:id="@+id/backButt"
@@ -113,12 +75,10 @@
         android:layout_marginBottom="3dp"
         android:layout_marginEnd="312dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
         android:onClick="OnBackClick"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewWorstCategory"
         app:srcCompat="@android:drawable/ic_menu_revert" />
 
     <Button
@@ -126,13 +86,11 @@
         android:layout_width="88dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="47dp"
-        android:layout_marginEnd="28dp"
         android:layout_marginStart="48dp"
         android:layout_marginTop="20dp"
         android:onClick="onDayStartisticClick"
         android:text="day"
         app:layout_constraintBottom_toTopOf="@+id/textViewCorrectAnswer"
-        app:layout_constraintEnd_toStartOf="@+id/buttonWeek"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView7" />
 </android.support.constraint.ConstraintLayout>
