@@ -16,7 +16,7 @@ public class ChoiceLevelPresenterImpl implements BasePresenter {
     private ChoiceLevelActivity activity;
     private WordModel model;
    SharedPreferences mSettings;
-    StatisticModel modell;
+
 
 
 
@@ -25,13 +25,12 @@ public class ChoiceLevelPresenterImpl implements BasePresenter {
         model = new WordModel(activity);
         mSettings = activity.getSharedPreferences(MainActivity.APP_PREFERENCES, Context.MODE_PRIVATE);
 
-        modell = new StatisticModel(activity);
     }
 
     @Override
     public void onBackClick() {
         activity.finish();
-        System.out.println(modell.getStatisticCount());
+
 
     }
 

@@ -23,7 +23,7 @@ public class StatisticDataDao extends AbstractDao<StatisticData, Long> {
      */
     public static class Properties {
         public final static Property _id_statistics = new Property(0, long.class, "_id_statistics", true, "_id");
-        public final static Property _idWord = new Property(1, int.class, "_idWord", false, "_id_word");
+        public final static Property _idWord = new Property(1, long.class, "_idWord", false, "_id_word");
         public final static Property CorrectAnswer = new Property(2, int.class, "correctAnswer", false, "correct_answer");
         public final static Property DateAnswer = new Property(3, String.class, "dateAnswer", false, "date_answer");
     }
@@ -88,7 +88,7 @@ public class StatisticDataDao extends AbstractDao<StatisticData, Long> {
     public StatisticData readEntity(Cursor cursor, int offset) {
         StatisticData entity = new StatisticData( //
             cursor.getLong(offset + 0), // _id_statistics
-            cursor.getInt(offset + 1), // _idWord
+            cursor.getLong(offset + 1), // _idWord
             cursor.getInt(offset + 2), // correctAnswer
             cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3) // dateAnswer
         );
@@ -98,7 +98,7 @@ public class StatisticDataDao extends AbstractDao<StatisticData, Long> {
     @Override
     public void readEntity(Cursor cursor, StatisticData entity, int offset) {
         entity.set_id_statistics(cursor.getLong(offset + 0));
-        entity.set_idWord(cursor.getInt(offset + 1));
+        entity.set_idWord(cursor.getLong(offset + 1));
         entity.setCorrectAnswer(cursor.getInt(offset + 2));
         entity.setDateAnswer(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
      }

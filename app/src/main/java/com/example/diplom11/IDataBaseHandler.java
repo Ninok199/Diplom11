@@ -19,8 +19,11 @@ public interface IDataBaseHandler {
    List <WordData> getComplexity(String complexity);
    StatisticData getStatistic (int id);
    List<StatisticData> getAllStatistic();
-   List<StatisticData> getStatisticData(String date);
     int getStatisticCount();
+    int getCountAnswerWord(int id);
+    public String getDataAnswerWord(int id);
+    public int getStatisticCountByWord() ;
+    void addStatistic(StatisticData statisticData);
 
    }
 

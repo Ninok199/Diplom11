@@ -24,20 +24,30 @@ public class StatisticModel {
     }
 
 
-    StatisticData getStatistic(int id) {
+    public StatisticData getStatistic(int id) {
         return db.getStatistic(id);
     }
 
-    List<StatisticData> getAllStatistic() {
+    public List<StatisticData> getAllStatistic() {
         return db.getAllStatistic();
     }
 
-    List<StatisticData> getStatisticData(String date) {
-        return db.getStatisticData(date);
-    }
 
     public int getStatisticCount() {
        return db.getStatisticCount();
     }
+    public int getCountAnswerWord(int id){
+        return db.getCountAnswerWord(id);
+    }
+    public void addStatistic(StatisticData statisticData) {
+        db.addStatistic(statisticData);
+    }
 
+    public String getDataAnswerWord(int id){
+        return db.getDataAnswerWord(id);
+    }
+
+    public int getStatisticCountByWord() {
+        return db.getStatisticCountByWord();
+    }
 }

@@ -14,24 +14,38 @@ public class StatisticData {
         @Id
         private long _id_statistics;
         @Property(nameInDb = "_id_word")
-        private int _idWord;
+        private long _idWord;
         @Property(nameInDb = "correct_answer")
         private int correctAnswer;
     @Property(nameInDb = "date_answer")
     private String dateAnswer;
 
-    
 
-    public StatisticData(){}
 
-    @Generated(hash = 688486151)
-    public StatisticData(long _id_statistics, int _idWord, int correctAnswer,
+
+
+    @Generated(hash = 644131309)
+    public StatisticData(long _id_statistics, long _idWord, int correctAnswer,
             String dateAnswer) {
         this._id_statistics = _id_statistics;
         this._idWord = _idWord;
         this.correctAnswer = correctAnswer;
         this.dateAnswer = dateAnswer;
     }
+
+    @Generated(hash = 1584360835)
+    public StatisticData() {
+    }
+
+
+    public StatisticData( long _idWord, int correctAnswer,
+                          String dateAnswer) {
+        this._idWord = _idWord;
+        this.correctAnswer = correctAnswer;
+        this.dateAnswer = dateAnswer;
+    }
+
+    
 
     public long get_id_statistics() {
         return _id_statistics;
@@ -41,11 +55,11 @@ public class StatisticData {
         this._id_statistics = _id_statistics;
     }
 
-    public int get_idWord() {
+    public long get_idWord() {
         return _idWord;
     }
 
-    public void set_idWord(int _idWord) {
+    public void set_idWord(long _idWord) {
         this._idWord = _idWord;
     }
 
