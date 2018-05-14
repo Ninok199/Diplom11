@@ -20,7 +20,7 @@ StatisticActivityPresenter presenter;
 TextView correctAnswerView;
 TextView incorrectAnswer;
 TextView studyCount;
-TextView noStudyWordCount;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +29,6 @@ TextView noStudyWordCount;
         correctAnswerView = findViewById(R.id.textViewCorrectAnswer);
         incorrectAnswer = findViewById(R.id.textViewNoCorrectAnswer);
         studyCount = findViewById(R.id.textViewBestCategory);
-        noStudyWordCount = findViewById(R.id.textViewWorstCategory);
         presenter = new StatisticActivityPresenter(this);
 
 
