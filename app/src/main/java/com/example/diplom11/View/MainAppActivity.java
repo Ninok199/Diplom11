@@ -1,6 +1,7 @@
 package com.example.diplom11.View;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -26,6 +27,8 @@ public class MainAppActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         presenter = new MainActivityPresenter(this);
         mSelectText = findViewById(R.id.textView4);
+        mSelectText.setTypeface(Typeface.createFromAsset(
+                getAssets(), "fonts/11364.ttf"));
         g =  findViewById(R.id.gridbuttonsview);
         setmAdapter();
 
@@ -48,7 +51,7 @@ public void setmAdapter(){
     mAdapter = new DataAdapter(this,
             android.R.layout.simple_list_item_1,this);
               g.setAdapter(mAdapter);
-    getmSelectText().setText(mAdapter.getTextFromPresenter());
+    getmSelectText().setText( mAdapter.getTextFromPresenter());
 }
 
     public void onClickConfigMenu(View view) {

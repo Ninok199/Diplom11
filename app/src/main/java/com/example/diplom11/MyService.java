@@ -1,6 +1,7 @@
 package com.example.diplom11;
 
 import android.app.KeyguardManager;
+import android.app.NotificationManager;
 import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.Intent;
@@ -29,6 +30,15 @@ public class MyService extends Service {
     @Override
     public void onCreate() {
 
+
+
+        super.onCreate();
+
+
+    }
+
+    public int onStartCommand(Intent intent, int flags, int startId) {
+
         // проверяем в фоне все время работы экрана
         IntentFilter filter = new IntentFilter(Intent.ACTION_SCREEN_ON);
         // фильтруем на появление флага выключения экрана
@@ -36,12 +46,16 @@ public class MyService extends Service {
         // если это так то запускаем рессивер
         mReceiver = new LockScreenReceiver();
         registerReceiver(mReceiver, filter);
-        super.onCreate();
+        //return Service.START_STICKY;
+        return Service.START_REDELIVER_INTENT;
     }
-
     @Override
     public void onDestroy() {
 
+
+
+        //Disabling service
+        stopSelf();
         unregisterReceiver(mReceiver);
         super.onDestroy();
     }

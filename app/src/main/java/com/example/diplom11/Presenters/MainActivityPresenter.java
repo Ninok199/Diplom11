@@ -57,14 +57,14 @@ public class MainActivityPresenter implements BasePresenter {
         int mMonth = c.get(Calendar.MONTH);
         int mDay = c.get(Calendar.DAY_OF_MONTH);
 
-        if(Objects.equals(activity.getmSelectText().getText().toString(), model.getRussWord(activity.mAdapter.getItem(position)).getRussian())){
+        if(Objects.equals(activity.getmSelectText().getText().toString(), model.getEnglishWord(activity.mAdapter.getItem(position)).getEnglish())){
 
 
-            model1.addStatistic(new StatisticData(model.getRussWord(activity.mAdapter.getItem(position)).get_id(),1, mDay + ".0"+(mMonth+1) +"."+ (mYear-2000)));
+            model1.addStatistic(new StatisticData(model.getEnglishWord(activity.mAdapter.getItem(position)).get_id(),1, mDay + ".0"+(mMonth+1) +"."+ (mYear-2000)));
             activity.finish();
         }
         else {
-            model1.addStatistic(new StatisticData(model.getRussWord(activity.mAdapter.getItem(position)).get_id(),-1, mDay + ".0"+(mMonth+1) +"."+ (mYear-2000)));
+            model1.addStatistic(new StatisticData(model.getEnglishWord(activity.mAdapter.getItem(position)).get_id(),-1, mDay + ".0"+(mMonth+1) +"."+ (mYear-2000)));
 
             activity.setmAdapter();
         }
@@ -73,8 +73,8 @@ public class MainActivityPresenter implements BasePresenter {
 
 
 
-    public String getRussText(){
-    return  model.getWord(integers.get(getOnePosition(integers))).getRussian();
+    public String getEngText(){
+    return  model.getWord(integers.get(getOnePosition(integers))).getEnglish();
     }
 
 
@@ -115,7 +115,7 @@ public class MainActivityPresenter implements BasePresenter {
     public ArrayList<String> initStringItems(){
         ArrayList<String> items = new ArrayList<>();
         for(int i=0;i<4;i++) {
-            String k = model.getWord(integers.get(i)).getEnglish();
+            String k = model.getWord(integers.get(i)).getRussian();
             items.add(k);
         }
 

@@ -178,14 +178,14 @@ public class DataBaseHandlerImpl extends SQLiteOpenHelper implements IDataBaseHa
         myDataBase.close();
     }
 
-    public WordData getColumnRussian(String engword) {
+    public WordData getColumnEnglish(String russ) {
         myDataBase = this.getReadableDatabase();
         WordData wordData = null;
         try {
 
 
-            @SuppressLint("Recycle") Cursor cursor = myDataBase.query(TABLE_NAME, new String[]{_ID, COLUMN_ENGLISH, COLUMN_RUSSIAN, COLUMN_TRANSCRIPTION, COLUMN_PART_SPEECH, COLUMN_COMPLEXITY, COLUMN_WORD_CATEGORY}, COLUMN_ENGLISH + "=?",
-                    new String[]{String.valueOf(engword)}, null, null, null, null);
+            @SuppressLint("Recycle") Cursor cursor = myDataBase.query(TABLE_NAME, new String[]{_ID, COLUMN_ENGLISH, COLUMN_RUSSIAN, COLUMN_TRANSCRIPTION, COLUMN_PART_SPEECH, COLUMN_COMPLEXITY, COLUMN_WORD_CATEGORY}, COLUMN_RUSSIAN + "=?",
+                    new String[]{String.valueOf(russ)}, null, null, null, null);
 
             if (cursor != null) {
                 cursor.moveToFirst();

@@ -17,6 +17,7 @@
     <string name="change_color">Выберите цвет фона</string>
     <string name="change_font">Выберите стиль шрифта</string>
     <string name="off_app_title">Временно отключить приложение</string>
+    <string name="mainTextOnMainMenu">Выберете перевод слова:</string>
     <string-array name="itemsOfMenu">
         <item>"Выбор уровня"</item>
         <item>"Переключение режима"</item>

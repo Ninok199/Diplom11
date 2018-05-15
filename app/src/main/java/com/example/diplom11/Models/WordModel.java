@@ -51,8 +51,8 @@ public class WordModel
 
     }
 
-    public WordData getRussWord (String eng){
-        return db.getColumnRussian(eng);
+    public WordData getEnglishWord (String russ){
+        return db.getColumnEnglish(russ);
     }
     public WordData getWord(int id) {
         return db.getWord(id);

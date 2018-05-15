@@ -1,6 +1,7 @@
 package com.example.diplom11;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -64,6 +65,9 @@ public class DataAdapter extends ArrayAdapter<String> {
         }
 
         label.setText(items.get(position));
+        label.setTextColor(mContext.getResources().getColor(R.color.colorPrimary));
+        label.setTextSize(36);
+        label.setTypeface(Typeface.createFromAsset(mContext.getAssets(), "fonts/11364.ttf"));
         return (convertView);
     }
 
@@ -75,7 +79,7 @@ public class DataAdapter extends ArrayAdapter<String> {
 
 
     public String getTextFromPresenter(){
-        return presenter.getRussText();
+        return presenter.getEngText();
     }
 
 

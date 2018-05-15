@@ -7,7 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
-
+import android.view.View;
 
 
 import com.example.diplom11.View.MainAppActivity;
@@ -52,6 +52,8 @@ public class MainActivity extends AppCompatActivity {
         }
         finish();
     }
-    }
+
+
+}
 
 
