@@ -23,8 +23,6 @@
         <item>"Переключение режима"</item>
         <item>"Статистика"</item>
         <item>"Словарь"</item>
-        <item>"Отображение"</item>
-        <item>"Временно отключить"</item>
         <item>"О программе"</item>
     </string-array>
     <string-array name="itemsOfChoiceLevels">

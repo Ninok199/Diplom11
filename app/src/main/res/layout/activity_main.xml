@@ -18,7 +18,6 @@
         android:layout_marginBottom="316dp"
         android:lineSpacingMultiplier="1.2"
         android:shadowDx="0.5"
-        android:text="пппппп"
         android:textAlignment="center"
         android:textColor="@color/colorPrimary"
         android:textSize="110sp"
