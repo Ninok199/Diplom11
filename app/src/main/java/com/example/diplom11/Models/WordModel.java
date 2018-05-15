@@ -77,4 +77,7 @@ public class WordModel
     public List<WordData> getComplexity(String complexity){
         return db.getComplexity(complexity);
     }
+    public int getAllWordsCount(){
+        return db.getAllWordsCount();
+    }
 }

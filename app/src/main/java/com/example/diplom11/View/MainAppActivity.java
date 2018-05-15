@@ -26,6 +26,7 @@ public class MainAppActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         presenter = new MainActivityPresenter(this);
+
         mSelectText = findViewById(R.id.textView4);
         mSelectText.setTypeface(Typeface.createFromAsset(
                 getAssets(), "fonts/11364.ttf"));

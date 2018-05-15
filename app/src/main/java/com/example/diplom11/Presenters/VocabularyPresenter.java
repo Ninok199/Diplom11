@@ -16,7 +16,7 @@ public class VocabularyPresenter implements BasePresenter {
     public VocabularyPresenter(VocabularyActivity activity){
         this.activity=activity;
         model =new WordModel(activity);
-        wordCount = model.getWordsCount("0");
+        wordCount = model.getAllWordsCount();
     }
     @Override
     public void onBackClick() {

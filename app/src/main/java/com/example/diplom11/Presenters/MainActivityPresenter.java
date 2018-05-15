@@ -31,6 +31,7 @@ public class MainActivityPresenter implements BasePresenter {
     private Random random;
      private SharedPreferences mSettings;
      String complex;
+     int n =0;
 
 
     public MainActivityPresenter(MainAppActivity activity){
@@ -39,8 +40,10 @@ public class MainActivityPresenter implements BasePresenter {
         model1 = new StatisticModel(activity.getApplicationContext());
         mSettings = activity.getSharedPreferences(MainActivity.APP_PREFERENCES,Context.MODE_PRIVATE);
         complex = mSettings.getString(MainActivity.APP_PREFERENCES_LEVEL_WORDS,"0");
+        n= model1.getStatisticCountByWord();
+        System.out.println(n+ " n");
 
-
+        checkWords();
 
     }
 
@@ -58,8 +61,6 @@ public class MainActivityPresenter implements BasePresenter {
         int mDay = c.get(Calendar.DAY_OF_MONTH);
 
         if(Objects.equals(activity.getmSelectText().getText().toString(), model.getEnglishWord(activity.mAdapter.getItem(position)).getEnglish())){
-
-
             model1.addStatistic(new StatisticData(model.getEnglishWord(activity.mAdapter.getItem(position)).get_id(),1, mDay + ".0"+(mMonth+1) +"."+ (mYear-2000)));
             activity.finish();
         }
@@ -71,7 +72,16 @@ public class MainActivityPresenter implements BasePresenter {
 
     }
 
+public void checkWords(){
+        int count =0;
+    for (int i=1;i<n;i++) {
+        count = model1.getCountAnswerWord(i);
+        if (count >= 3 && model.getWord(i).getWord_knowledge()!=1) {
+          model.updateWord(new WordData(model.getWord(i).get_id(),model.getWord(i).getEnglish(),model.getWord(i).getRussian(),model.getWord(i).getTranscription(),model.getWord(i).getPart_speech(),model.getWord(i).getComplexity(),1));
 
+        }
+    }
+}
 
     public String getEngText(){
     return  model.getWord(integers.get(getOnePosition(integers))).getEnglish();

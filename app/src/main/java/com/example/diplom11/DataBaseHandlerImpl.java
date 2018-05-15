@@ -32,7 +32,7 @@ public class DataBaseHandlerImpl extends SQLiteOpenHelper implements IDataBaseHa
     private final static String COLUMN_TRANSCRIPTION = "transcription";
     private final static String COLUMN_PART_SPEECH = "part_speech";
     private final static String COLUMN_COMPLEXITY = "complexity";
-    private final static String COLUMN_WORD_CATEGORY = "word_category";
+    private final static String COLUMN_WORD_KNOWLEDGE = "word_knowledge";
     private final static String TABLE_NAME = "word";
 
     //statistic
@@ -148,7 +148,7 @@ public class DataBaseHandlerImpl extends SQLiteOpenHelper implements IDataBaseHa
                 "\"transcription\" TEXT," + // 3: transcription
                 "\"part_speech\" INTEGER NOT NULL ," + // 4: part_speech
                 "\"complexity\" INTEGER NOT NULL ," + // 5: complexity
-                "\"word_category\" INTEGER NOT NULL );"); // 6: word_category);
+                "\"word_knowledge\" INTEGER NOT NULL );"); // 6: word_category);
 
         db.execSQL("CREATE TABLE IF NOT EXISTS "+ TABLE_NAME_STATISTICS + "(" + _ID_STATISTIC + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                _ID_WORD + " INTEGER NOT NULL ," + // 5: complexity
@@ -173,7 +173,7 @@ public class DataBaseHandlerImpl extends SQLiteOpenHelper implements IDataBaseHa
         values.put(COLUMN_TRANSCRIPTION, word.getTranscription());
         values.put(COLUMN_PART_SPEECH, word.getPart_speech());
         values.put(COLUMN_COMPLEXITY, word.getComplexity());
-        values.put(COLUMN_WORD_CATEGORY, word.getWord_category());
+        values.put(COLUMN_WORD_KNOWLEDGE, word.getWord_knowledge());
         myDataBase.insert(TABLE_NAME, null, values);
         myDataBase.close();
     }
@@ -184,7 +184,7 @@ public class DataBaseHandlerImpl extends SQLiteOpenHelper implements IDataBaseHa
         try {
 
 
-            @SuppressLint("Recycle") Cursor cursor = myDataBase.query(TABLE_NAME, new String[]{_ID, COLUMN_ENGLISH, COLUMN_RUSSIAN, COLUMN_TRANSCRIPTION, COLUMN_PART_SPEECH, COLUMN_COMPLEXITY, COLUMN_WORD_CATEGORY}, COLUMN_RUSSIAN + "=?",
+            @SuppressLint("Recycle") Cursor cursor = myDataBase.query(TABLE_NAME, new String[]{_ID, COLUMN_ENGLISH, COLUMN_RUSSIAN, COLUMN_TRANSCRIPTION, COLUMN_PART_SPEECH, COLUMN_COMPLEXITY, COLUMN_WORD_KNOWLEDGE}, COLUMN_RUSSIAN + "=?",
                     new String[]{String.valueOf(russ)}, null, null, null, null);
 
             if (cursor != null) {
@@ -213,7 +213,7 @@ public class DataBaseHandlerImpl extends SQLiteOpenHelper implements IDataBaseHa
         Cursor cursor;
         try {
 
-            cursor = myDataBase.query(TABLE_NAME, new String[]{_ID, COLUMN_ENGLISH, COLUMN_RUSSIAN, COLUMN_TRANSCRIPTION, COLUMN_PART_SPEECH, COLUMN_COMPLEXITY, COLUMN_WORD_CATEGORY}, _ID + "=?",
+            cursor = myDataBase.query(TABLE_NAME, new String[]{_ID, COLUMN_ENGLISH, COLUMN_RUSSIAN, COLUMN_TRANSCRIPTION, COLUMN_PART_SPEECH, COLUMN_COMPLEXITY, COLUMN_WORD_KNOWLEDGE}, _ID + "=?",
                     new String[]{String.valueOf(id)}, null, null, null, null);
 
             if (cursor != null) {
@@ -235,7 +235,7 @@ return data;
     @Override
     public List<WordData> getAllWords() {
         List<WordData> wordList = new ArrayList<>();
-        String selectQuery = "SELECT  * FROM " + TABLE_NAME;
+        String selectQuery = "SELECT  * FROM " + TABLE_NAME + " where "+COLUMN_WORD_KNOWLEDGE+" =0";
 
         myDataBase = this.getWritableDatabase();
         @SuppressLint("Recycle") Cursor cursor = myDataBase.rawQuery(selectQuery, null);
@@ -250,7 +250,7 @@ try {
             word.setTranscription(cursor.getString(3));
             word.setPart_speech(cursor.getInt(4));
             word.setComplexity(cursor.getInt(5));
-            word.setWord_category(cursor.getInt(6));
+            word.setWord_knowledge(cursor.getInt(6));
 
             wordList.add(word);
         } while (cursor.moveToNext());
@@ -315,7 +315,7 @@ finally {
                 case "2":
                 case "3":
                 case "4":
-                    cursor = myDataBase.query(TABLE_NAME, new String[]{_ID, COLUMN_ENGLISH, COLUMN_RUSSIAN, COLUMN_TRANSCRIPTION, COLUMN_PART_SPEECH, COLUMN_COMPLEXITY, COLUMN_WORD_CATEGORY}, COLUMN_COMPLEXITY + "=?",
+                    cursor = myDataBase.query(TABLE_NAME, new String[]{_ID, COLUMN_ENGLISH, COLUMN_RUSSIAN, COLUMN_TRANSCRIPTION, COLUMN_PART_SPEECH, COLUMN_COMPLEXITY, COLUMN_WORD_KNOWLEDGE}, COLUMN_COMPLEXITY + "=? and " + COLUMN_WORD_KNOWLEDGE+ " =0",
                             new String[]{value1}, null, null, null, null);
 
                     if (cursor.moveToFirst()) {
@@ -327,7 +327,7 @@ finally {
                             word.setTranscription(cursor.getString(3));
                             word.setPart_speech(cursor.getInt(4));
                             word.setComplexity(cursor.getInt(5));
-                            word.setWord_category(cursor.getInt(6));
+                            word.setWord_knowledge(cursor.getInt(6));
 
                             data.add(word);
                         } while (cursor.moveToNext());
@@ -339,9 +339,9 @@ finally {
                 case "5":
                 case "6":
                 case "7":
-                    cursor = myDataBase.query(TABLE_NAME, new String[]{_ID, COLUMN_ENGLISH, COLUMN_RUSSIAN, COLUMN_TRANSCRIPTION, COLUMN_PART_SPEECH, COLUMN_COMPLEXITY, COLUMN_WORD_CATEGORY}, COLUMN_COMPLEXITY + "=? or " + COLUMN_COMPLEXITY + " =?",
-                            new String[]{value1, value2}, null, null, null, null);
 
+                    String query = "select * from " + TABLE_NAME+ " where ( "+ COLUMN_COMPLEXITY+" =" + value1+" or "+ COLUMN_COMPLEXITY+" =" + value2+") and " +COLUMN_WORD_KNOWLEDGE+" = 0;";
+                    cursor = myDataBase.rawQuery(query, null);
                     if (cursor.moveToFirst()) {
                         do {
                             WordData word = new WordData();
@@ -351,7 +351,7 @@ finally {
                             word.setTranscription(cursor.getString(3));
                             word.setPart_speech(cursor.getInt(4));
                             word.setComplexity(cursor.getInt(5));
-                            word.setWord_category(cursor.getInt(6));
+                            word.setWord_knowledge(cursor.getInt(6));
 
                             data.add(word);
                         } while (cursor.moveToNext());
@@ -514,7 +514,28 @@ try {
         }
         return count;
     }
+public int getAllWordsCount(){
+    String countQuery;
+    myDataBase = this.getReadableDatabase();
+    Cursor cursor;
+    int count = 0;
+    try {
 
+
+        countQuery = "SELECT  * FROM " + TABLE_NAME;
+        cursor = myDataBase.rawQuery(countQuery, null);
+        if (cursor != null) {
+            cursor.moveToFirst();
+        }
+        assert cursor != null;
+        count = cursor.getCount();
+    }catch (Exception e){
+        System.out.println("");
+    }finally {
+        myDataBase.close();
+    }
+    return count;
+}
     @SuppressLint("Recycle")
     @Override
     public int getWordsCount(String flag) {
@@ -529,7 +550,7 @@ try {
             switch (flag) {
                 case "0":
 
-                    countQuery = "SELECT  * FROM " + TABLE_NAME;
+                    countQuery = "SELECT  * FROM " + TABLE_NAME + " where "+COLUMN_WORD_KNOWLEDGE+ " =0";
                     cursor = myDataBase.rawQuery(countQuery, null);
                     if (cursor != null) {
                         cursor.moveToFirst();
@@ -541,7 +562,7 @@ try {
                 case "3":
                 case "4":
 
-                    cursor = myDataBase.query(TABLE_NAME, new String[]{_ID, COLUMN_ENGLISH, COLUMN_RUSSIAN, COLUMN_TRANSCRIPTION, COLUMN_PART_SPEECH, COLUMN_COMPLEXITY, COLUMN_WORD_CATEGORY}, COLUMN_COMPLEXITY + "=?",
+                    cursor = myDataBase.query(TABLE_NAME, new String[]{_ID, COLUMN_ENGLISH, COLUMN_RUSSIAN, COLUMN_TRANSCRIPTION, COLUMN_PART_SPEECH, COLUMN_COMPLEXITY, COLUMN_WORD_KNOWLEDGE}, COLUMN_COMPLEXITY + "=? and " + COLUMN_WORD_KNOWLEDGE+ " =0",
                             new String[]{value1}, null, null, null, null);
                     if (cursor != null) {
                         cursor.moveToFirst();
@@ -553,8 +574,8 @@ try {
                 case "5":
                 case "6":
                 case "7":
-                    cursor = myDataBase.query(TABLE_NAME, new String[]{_ID, COLUMN_ENGLISH, COLUMN_RUSSIAN, COLUMN_TRANSCRIPTION, COLUMN_PART_SPEECH, COLUMN_COMPLEXITY, COLUMN_WORD_CATEGORY}, COLUMN_COMPLEXITY + "=? or " + COLUMN_COMPLEXITY + "  =?",
-                            new String[]{value1, value2}, null, null, null, null);
+                    String query = "select * from " + TABLE_NAME+ " where ( "+ COLUMN_COMPLEXITY+" =" + value1+" or "+ COLUMN_COMPLEXITY+" =" + value2+") and " +COLUMN_WORD_KNOWLEDGE+" = 0;";
+                    cursor = myDataBase.rawQuery(query, null);
                     if (cursor != null) {
                         cursor.moveToFirst();
                     }
@@ -592,7 +613,7 @@ try {
         values.put(COLUMN_TRANSCRIPTION, word.getTranscription());
         values.put(COLUMN_PART_SPEECH, word.getPart_speech());
         values.put(COLUMN_COMPLEXITY, word.getComplexity());
-        values.put(COLUMN_WORD_CATEGORY, word.getWord_category());
+        values.put(COLUMN_WORD_KNOWLEDGE, word.getWord_knowledge());
         return myDataBase.update(TABLE_NAME, values, _ID + " = ?",
                 new String[] { String.valueOf(word.get_id()) });
     }

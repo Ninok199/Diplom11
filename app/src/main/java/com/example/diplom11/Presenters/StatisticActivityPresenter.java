@@ -2,7 +2,10 @@ package com.example.diplom11.Presenters;
 
 import com.example.diplom11.Data.StatisticData;
 import com.example.diplom11.Models.StatisticModel;
+import com.example.diplom11.Models.WordModel;
 import com.example.diplom11.View.StatisticActivity;
+
+import java.util.ArrayList;
 import java.util.Calendar;
 
 import java.util.List;
@@ -18,11 +21,17 @@ public class StatisticActivityPresenter implements BasePresenter {
     private int mMonth = c.get(Calendar.MONTH);
     private int mDay = c.get(Calendar.DAY_OF_MONTH);
     private int n;
+    private int m;
+
+
     public StatisticActivityPresenter(StatisticActivity activity){
         this.activity=activity;
         model =new StatisticModel(activity);
         n = model.getStatisticCountByWord();
-        System.out.println(n);
+        m =model.getStatisticCount();
+        statisticData = model.getAllStatistic();
+
+
 
 
     }
@@ -47,6 +56,7 @@ public class StatisticActivityPresenter implements BasePresenter {
 for (int i=1;i<n;i++){
     count= model.getCountAnswerWord(i);
     if (count>=3 && (model.getDataAnswerWord(i).equals(mDay + ".0"+(mMonth+1) +"."+ (mYear-2000)))){
+
         word++;
     }
 }
@@ -70,13 +80,13 @@ break;
         int count =0;
 
 
-        statisticData = model.getAllStatistic();
+
         switch (flag){
             case 1:
 
 
-                for (int i=1;i<model.getStatisticCount();i++){
-                   if (statisticData.get(i).getCorrectAnswer()==1 &&(model.getStatistic(i).getDateAnswer().equals(mDay + ".0"+(mMonth+1) +"."+ (mYear-2000)))){
+                for (int i=1;i<m;i++){
+                   if (statisticData.get(i).getCorrectAnswer()==1 &&(statisticData.get(i).getDateAnswer().equals(mDay + ".0"+(mMonth+1) +"."+ (mYear-2000)))){
                        count++;
                    }
                 }
@@ -85,7 +95,7 @@ break;
             case 3:
 
 
-                for (int i=0;i<model.getStatisticCount();i++){
+                for (int i=0;i<m;i++){
                     if(statisticData.get(i).getCorrectAnswer()==1){
                         count++;
                     }
@@ -99,19 +109,20 @@ break;
 
         public int getIncorrectAnswer(int flag){
         int count =0;
-        statisticData = model.getAllStatistic();
+
         switch (flag){
             case 1:
-                for (int i=1;i<model.getStatisticCount();i++){
-                    if (statisticData.get(i).getCorrectAnswer()==-1 &&(model.getStatistic(i).getDateAnswer().equals(mDay + ".0"+(mMonth+1) +"."+ (mYear-2000)))){
 
+
+                for (int i=1;i<m;i++){
+                    if (statisticData.get(i).getCorrectAnswer()==-1 &&(statisticData.get(i).getDateAnswer().equals(mDay + ".0"+(mMonth+1) +"."+ (mYear-2000)))){
                         count++;
                     }
                 }
 
                 break;
             case 3:
-                for (int i=0;i<model.getStatisticCount();i++){
+                for (int i=0;i<m;i++){
                     if(statisticData.get(i).getCorrectAnswer()==-1){
                         count++;
                     }

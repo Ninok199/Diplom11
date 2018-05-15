@@ -21,34 +21,34 @@ public class WordData {
     private int part_speech;
     @Property(nameInDb = "complexity")
     private int complexity;
-    @Property(nameInDb = "word_category")
-    private int word_category;
-
-    public WordData (String english, String russian, String transcription, int part_speech,int complexity,int word_category){
-
-        this.english=english;
-        this.russian=russian;
-        this.transcription=transcription;
-        this.part_speech=part_speech;
-        this.complexity=complexity;
-        this.word_category=word_category;
-    }
+    @Property(nameInDb = "word_knowledge")
+    private int word_knowledge;
 
 
-    @Generated(hash = 580411504)
-    public WordData(long _id, String english, String russian, String transcription, int part_speech, int complexity, int word_category) {
+
+
+
+
+    @Generated(hash = 645985973)
+    public WordData(long _id, String english, String russian, String transcription,
+            int part_speech, int complexity, int word_knowledge) {
         this._id = _id;
         this.english = english;
         this.russian = russian;
         this.transcription = transcription;
         this.part_speech = part_speech;
         this.complexity = complexity;
-        this.word_category = word_category;
+        this.word_knowledge = word_knowledge;
     }
 
     @Generated(hash = 551690561)
     public WordData() {
     }
+
+
+
+
+  
 
     public long get_id() {
         return _id;
@@ -98,11 +98,11 @@ public class WordData {
         this.complexity = complexity;
     }
 
-    public int getWord_category() {
-        return word_category;
+    public int getWord_knowledge() {
+        return word_knowledge;
     }
 
-    public void setWord_category(int word_category) {
-        this.word_category = word_category;
+    public void setWord_knowledge(int word_knowledge) {
+        this.word_knowledge = word_knowledge;
     }
 }
