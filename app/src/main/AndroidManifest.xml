@@ -28,7 +28,6 @@
         <activity android:name=".View.ConfigurationActivity" />
         <activity android:name=".View.ChoiceLevelActivity" />
         <activity android:name=".View.ChoiceModeActivity" />
-        <activity android:name=".View.ChangeViewActivity" />
         <activity android:name=".View.MainAppActivity" />
         <activity android:name=".View.WordTranslateActivity" />
         <activity android:name=".View.VocabularyActivity" />

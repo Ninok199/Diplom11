@@ -1,5 +1,6 @@
 package com.example.diplom11.View;
 
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -7,12 +8,10 @@ import android.widget.TextView;
 
 import com.example.diplom11.Presenters.StatisticActivityPresenter;
 import com.example.diplom11.R;
-import com.jjoe64.graphview.GraphView;
-import com.jjoe64.graphview.series.DataPoint;
-import com.jjoe64.graphview.series.LineGraphSeries;
 
-import java.util.ArrayList;
-import java.util.List;
+
+import static com.example.diplom11.R.string.*;
+import static com.example.diplom11.R.string.correctanswer;
 
 
 public class StatisticActivity extends AppCompatActivity {
@@ -20,6 +19,7 @@ StatisticActivityPresenter presenter;
 TextView correctAnswerView;
 TextView incorrectAnswer;
 TextView studyCount;
+TextView text;
 
 
     @Override
@@ -29,6 +29,15 @@ TextView studyCount;
         correctAnswerView = findViewById(R.id.textViewCorrectAnswer);
         incorrectAnswer = findViewById(R.id.textViewNoCorrectAnswer);
         studyCount = findViewById(R.id.textViewBestCategory);
+        text = findViewById(R.id.textView7);
+        text.setTypeface(Typeface.createFromAsset(
+                getAssets(), "fonts/11364.ttf"));
+        correctAnswerView.setTypeface(Typeface.createFromAsset(
+                getAssets(), "fonts/11364.ttf"));
+        incorrectAnswer.setTypeface(Typeface.createFromAsset(
+                getAssets(), "fonts/11364.ttf"));
+        studyCount.setTypeface(Typeface.createFromAsset(
+                getAssets(), "fonts/11364.ttf"));
         presenter = new StatisticActivityPresenter(this);
 
 
@@ -43,9 +52,9 @@ TextView studyCount;
 
     public void onAllTimeStatisticClick(View view) {
 
-        correctAnswerView.setText("CorrectAnswer: "+ presenter.getCorrectAnswer(3));
-        incorrectAnswer.setText("NO coreect: "+presenter.getIncorrectAnswer(3));
-        studyCount.setText("study words: " +presenter.getStudyWords(3));
+        correctAnswerView.setText(getString(correctanswer)+ presenter.getCorrectAnswer(3));
+        incorrectAnswer.setText(getString(incorrectanswer)+presenter.getIncorrectAnswer(3));
+        studyCount.setText(getString(allwords) +presenter.getStudyWords(3));
 
     }
 
@@ -55,9 +64,9 @@ TextView studyCount;
     }
 
     public void onDayStartisticClick(View view) {
-        correctAnswerView.setText("CorrectAnswer: "+ presenter.getCorrectAnswer(1));
-        incorrectAnswer.setText("NO coreect: "+presenter.getIncorrectAnswer(1));
-        studyCount.setText("study words: " +presenter.getStudyWords(1));
+        correctAnswerView.setText(getString(correctanswer)+ presenter.getCorrectAnswer(1));
+        incorrectAnswer.setText(getString(incorrectanswer)+presenter.getIncorrectAnswer(1));
+        studyCount.setText(getString(allwords) +presenter.getStudyWords(1));
 
     }
 }

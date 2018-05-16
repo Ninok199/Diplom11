@@ -1,6 +1,7 @@
 package com.example.diplom11.View;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -54,5 +55,14 @@ public class WordTranslateActivity extends AppCompatActivity {
         rusText.setText(presenter.initRussItem());
         transText.setText(presenter.initTranscriptionItem());
         partSpeechText.setText(presenter.initPartSpeechItem());
+
+        engText.setTypeface(Typeface.createFromAsset(
+                getAssets(), "fonts/11364.ttf"));
+        rusText.setTypeface(Typeface.createFromAsset(
+                getAssets(), "fonts/11364.ttf"));
+        transText.setTypeface(Typeface.createFromAsset(
+                getAssets(), "fonts/11364.ttf"));
+        partSpeechText.setTypeface(Typeface.createFromAsset(
+                getAssets(), "fonts/11364.ttf"));
     }
 }
