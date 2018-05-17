@@ -41,6 +41,17 @@ public class WordData {
         this.word_knowledge = word_knowledge;
     }
 
+    public WordData( String english, String russian, String transcription,
+                    int part_speech, int complexity, int word_knowledge) {
+
+        this.english = english;
+        this.russian = russian;
+        this.transcription = transcription;
+        this.part_speech = part_speech;
+        this.complexity = complexity;
+        this.word_knowledge = word_knowledge;
+    }
+
     @Generated(hash = 551690561)
     public WordData() {
     }

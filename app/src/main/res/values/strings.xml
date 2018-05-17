@@ -21,6 +21,7 @@
     <string name="correctanswer">Правильных ответов дано:</string>
     <string name="incorrectanswer">Неправильных ответов дано:</string>
     <string name="allwords">Всего выучено слов:</string>
+    <string name="addWord">Добавить слово</string>
     <string-array name="itemsOfMenu">
         <item>"Выбор уровня"</item>
         <item>"Переключение режима"</item>
@@ -63,5 +64,11 @@
         <item>Не показывать 1 час</item>
         <item>Не показывать 3 часа</item>
         <item>Не показывать сегодня</item>
+    </string-array>
+    <string-array name="part_speech">
+        <item>Кот</item>
+        <item>Кошка</item>
+        <item>Котёнок</item>
+        <item>Животное</item>
     </string-array>
 </resources>

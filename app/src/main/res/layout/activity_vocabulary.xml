@@ -4,18 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/back"
     tools:context="com.example.diplom11.View.VocabularyActivity">
 
     <TextView
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_marginBottom="15dp"
         android:layout_marginEnd="182dp"
         android:layout_marginStart="144dp"
         android:layout_marginTop="8dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/scrollView2"
+        android:text="Словарь"
+        android:textAlignment="center"
+        android:textColor="@color/colorPrimary"
+        android:textSize="36sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,22 +27,85 @@
         android:id="@+id/imageButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="17dp"
         android:layout_marginEnd="312dp"
         android:layout_marginStart="16dp"
+        android:alpha="0.5"
         android:onClick="onBackClick"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@android:drawable/ic_menu_revert" />
 
-    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    <TableLayout
+        android:id="@+id/tableLayout"
+        android:layout_width="363dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:background="#eeeeee"
+        android:shrinkColumns="0,1"
+        android:stretchColumns="*"
+        app:layout_constraintBottom_toTopOf="@+id/scrollView2"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        tools:layout_editor_absoluteX="5dp">
+
+        <TableRow
+            android:id="@+id/header"
+            android:background="#ccc"
+            android:padding="10dp">
+
+            <TextView
+                android:layout_gravity="center"
+                android:text="Eng" />
+
+            <TextView
+                android:layout_gravity="center"
+                android:text="Transcription" />
+
+            <TextView
+                android:layout_gravity="center"
+                android:text="Ru" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_gravity="center"
+                android:text="ЧР" />
+        </TableRow>
+    </TableLayout>
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="155dp"
+        android:layout_height="49dp"
+        android:layout_marginEnd="115dp"
+        android:layout_marginStart="42dp"
+        android:layout_marginTop="32dp"
+        android:alpha="0.5"
+        android:onClick="onSaveClick"
+        android:text="@string/addWord"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/imageButton"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView2"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <ScrollView
         android:id="@+id/scrollView2"
-        android:layout_width="370dp"
-        android:layout_height="370dp"
+        android:layout_width="391dp"
+        android:layout_height="434dp"
+        android:layout_marginBottom="30dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="90dp"
         android:fillViewport="true"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="42dp"
+        app:layout_constraintBottom_toTopOf="@+id/imageButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.214"
         tools:ignore="MissingConstraints">
 
         <TableLayout
@@ -60,28 +125,6 @@
             app:layout_constraintVertical_bias="1.0"
             tools:layout_editor_absoluteX="8dp">
 
-            <TableRow
-                android:id="@+id/header"
-                android:background="#ccc"
-                android:padding="10dp">
-
-                <TextView
-                    android:layout_gravity="center"
-                    android:text="Eng" />
-
-                <TextView
-                    android:layout_gravity="center"
-                    android:text="Transcription" />
-
-                <TextView
-                    android:layout_gravity="center"
-                    android:text="Ru" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="ЧР" />
-            </TableRow>
 
             <TableRow xmlns:android="http://schemas.android.com/apk/res/android"
                 android:id="@+id/table_row">

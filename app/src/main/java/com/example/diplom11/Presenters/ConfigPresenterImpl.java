@@ -2,6 +2,7 @@ package com.example.diplom11.Presenters;
 
 
 
+import com.example.diplom11.View.AboutAppActivity;
 import com.example.diplom11.View.ChoiceLevelActivity;
 import com.example.diplom11.View.ChoiceModeActivity;
 import com.example.diplom11.View.ConfigurationActivity;
@@ -37,9 +38,11 @@ public class ConfigPresenterImpl implements BasePresenter {
                 activity.openActivity(StatisticActivity.class);
                 break;
 
-
             case 3:
                 activity.openActivity(VocabularyActivity.class);
+                break;
+            case 4:
+                activity.openActivity(AboutAppActivity.class);
                 break;
         }
     }

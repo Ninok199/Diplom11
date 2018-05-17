@@ -1,6 +1,7 @@
 package com.example.diplom11.View;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -17,6 +18,7 @@ public class VocabularyActivity extends AppCompatActivity {
 
     TableLayout tableLayout;
     VocabularyPresenter presenter;
+    TextView textView;
 
 
     @Override
@@ -25,6 +27,9 @@ public class VocabularyActivity extends AppCompatActivity {
         setContentView(R.layout.activity_vocabulary);
         presenter = new VocabularyPresenter(this);
         tableLayout = findViewById(R.id.table);
+        textView=findViewById(R.id.textView5);
+        textView.setTypeface(Typeface.createFromAsset(
+                getAssets(), "fonts/11364.ttf"));
 
         initData();
 
@@ -67,5 +72,9 @@ public class VocabularyActivity extends AppCompatActivity {
 
     public void onBackClick(View view) {
         presenter.onBackClick();
+    }
+
+    public void onSaveClick(View view) {
+        presenter.addNewWord();
     }
 }
