@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/back"
-    tools:context="com.example.diplom11.View.StatisticActivity">
+    tools:context=".Application.View.StatisticsActivity">
 
     <TextView
         android:id="@+id/textView7"
@@ -13,7 +13,7 @@
         android:layout_height="74dp"
         android:layout_marginStart="1dp"
         android:layout_marginTop="16dp"
-        android:text="Statistic"
+        android:text="Statistics"
         android:textAlignment="center"
         android:textColor="@color/colorPrimary"
         android:textSize="@android:dimen/notification_large_icon_height"
@@ -30,7 +30,7 @@
         android:layout_marginEnd="52dp"
         android:layout_marginStart="51dp"
         android:layout_marginTop="20dp"
-        android:onClick="onAllTimeStatisticClick"
+        android:onClick="onAllTimeStatisticsClick"
         android:text="за все время"
         app:layout_constraintBottom_toTopOf="@+id/textViewNoCorrectAnswer"
         app:layout_constraintEnd_toEndOf="parent"
@@ -128,7 +128,8 @@
         android:layout_marginStart="43dp"
         android:layout_marginTop="76dp"
         android:alpha="0.5"
-        android:text="Очистить статистику"
+        android:onClick="onStartAgainClick"
+        android:text="начать обучение заново"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/backButt"

@@ -9,7 +9,7 @@
     android:background="@drawable/back"
     android:textAlignment="center"
     android:textDirection="firstStrongLtr"
-    tools:context="com.example.diplom11.MainActivity">
+    tools:context="com.example.diplom11.Application.View.MainActivity">
 
     <TextView
         android:id="@+id/textView4"

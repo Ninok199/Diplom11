@@ -18,36 +18,36 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
-        <activity android:name=".MainActivity">
+        <activity android:name=".Application.View.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".View.ConfigurationActivity" />
-        <activity android:name=".View.ChoiceLevelActivity" />
-        <activity android:name=".View.ChoiceModeActivity" />
-        <activity android:name=".View.MainAppActivity" />
-        <activity android:name=".View.WordTranslateActivity" />
-        <activity android:name=".View.VocabularyActivity" />
-        <activity android:name=".View.StatisticActivity" />
-        <activity android:name=".StartActivity" />
-        <activity android:name=".View.AboutAppActivity"></activity>
+        <activity android:name=".Application.View.ConfigurationActivity" />
+        <activity android:name=".Application.View.ChoiceLevelActivity" />
+        <activity android:name=".Application.View.ChoiceModeActivity" />
+        <activity android:name=".Application.View.MainAppActivity" />
+        <activity android:name=".Application.View.WordTranslateActivity" />
+        <activity android:name=".Application.View.VocabularyActivity" />
+        <activity android:name=".Application.View.StatisticsActivity" />
+        <activity android:name=".Application.View.StartActivity" />
+        <activity android:name=".Application.View.AboutAppActivity"></activity>
 
         <service
-            android:name=".MyService"
+            android:name=".Application.StatusTracking.MyService"
             android:launchMode="singleTop"></service>
 
         <receiver
-            android:name=".LockScreenReceiver"
+            android:name=".Application.StatusTracking.LockScreenReceiver"
             android:enabled="true">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
 
-        <activity android:name=".View.AboutAppActivity"></activity>
+
     </application>
 
 </manifest>
