@@ -4,45 +4,59 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.diplom11.MainActivity">
+
+    android:layout_columnWeight="30"
+    android:background="@drawable/back"
+    android:textAlignment="center"
+    android:textDirection="firstStrongLtr"
+    tools:context="com.example.diplom11.Application.View.MainActivity">
 
     <TextView
         android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="111"
+        android:layout_width="370dp"
+        android:layout_height="253dp"
+        android:layout_marginBottom="316dp"
+        android:lineSpacingMultiplier="1.2"
+        android:shadowDx="0.5"
+        android:textAlignment="center"
+        android:textColor="@color/colorPrimary"
+        android:textSize="110sp"
+        android:textStyle="italic"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.123" />
+        app:layout_constraintRight_toRightOf="parent" />
 
     <ImageButton
         android:id="@+id/buttonConfig"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
+        style="@android:style/Widget.Holo.Light.ImageButton"
+        android:layout_width="66dp"
+        android:layout_height="57dp"
         android:layout_marginEnd="322dp"
-        android:layout_marginStart="6dp"
+        android:elevation="0dp"
         android:onClick="onClickConfigMenu"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@android:drawable/ic_menu_preferences" />
+        app:srcCompat="@android:drawable/ic_menu_manage" />
 
     <GridView
         android:id="@+id/gridbuttonsview"
-        android:layout_width="356dp"
+        android:layout_width="320dp"
         android:layout_height="171dp"
         android:layout_marginBottom="66dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="138dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="130dp"
+        android:columnWidth="90dp"
+        android:horizontalSpacing="80dp"
         android:numColumns="2"
+        android:padding="5dp"
         android:verticalSpacing="50dp"
         app:layout_constraintBottom_toTopOf="@+id/buttonConfig"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        app:layout_constraintTop_toBottomOf="@+id/textView4"
+        app:layout_constraintVertical_bias="0.623" />
 
 </android.support.constraint.ConstraintLayout>

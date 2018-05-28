@@ -1,10 +1,10 @@
 <resources>
-    <string name="app_name">Diplom1.1</string>
+    <string name="app_name">Unlock English</string>
     <string name="save">сохранить</string>
     <string name="configuration">Настройки</string>
     <string name="change_level">Выбор уровня</string>
     <string name="change_mode">Переключение режима</string>
-    <string name="statistic">Статистика</string>
+    <string name="Statistics">Статистика</string>
     <string name="vocabulary">Словарь</string>
     <string name="about_app">О программе</string>
     <string name="view">Отображение</string>
@@ -17,13 +17,16 @@
     <string name="change_color">Выберите цвет фона</string>
     <string name="change_font">Выберите стиль шрифта</string>
     <string name="off_app_title">Временно отключить приложение</string>
+    <string name="mainTextOnMainMenu">Выберете перевод слова:</string>
+    <string name="correctanswer">Правильных ответов дано:</string>
+    <string name="incorrectanswer">Неправильных ответов дано:</string>
+    <string name="allwords">Всего выучено слов:</string>
+    <string name="addWord">Добавить слово</string>
     <string-array name="itemsOfMenu">
         <item>"Выбор уровня"</item>
         <item>"Переключение режима"</item>
         <item>"Статистика"</item>
         <item>"Словарь"</item>
-        <item>"Отображение"</item>
-        <item>"Временно отключить"</item>
         <item>"О программе"</item>
     </string-array>
     <string-array name="itemsOfChoiceLevels">
@@ -61,5 +64,11 @@
         <item>Не показывать 1 час</item>
         <item>Не показывать 3 часа</item>
         <item>Не показывать сегодня</item>
+    </string-array>
+    <string-array name="part_speech">
+        <item>Кот</item>
+        <item>Кошка</item>
+        <item>Котёнок</item>
+        <item>Животное</item>
     </string-array>
 </resources>
