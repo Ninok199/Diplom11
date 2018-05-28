@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.util.SparseBooleanArray;
 
 import com.example.diplom11.MainActivity;
+import com.example.diplom11.Models.StatisticModel;
 import com.example.diplom11.Models.WordModel;
 import com.example.diplom11.View.ChoiceLevelActivity;
 
@@ -18,6 +19,7 @@ public class ChoiceLevelPresenterImpl implements BasePresenter {
 
 
 
+
     public ChoiceLevelPresenterImpl (ChoiceLevelActivity activity){
         this.activity = activity;
         model = new WordModel(activity);
@@ -28,6 +30,7 @@ public class ChoiceLevelPresenterImpl implements BasePresenter {
     @Override
     public void onBackClick() {
         activity.finish();
+
 
     }
 

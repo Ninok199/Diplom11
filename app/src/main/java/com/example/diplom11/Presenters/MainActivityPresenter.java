@@ -1,15 +1,21 @@
 package com.example.diplom11.Presenters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 
 import com.example.diplom11.Data.DaoSession;
+import com.example.diplom11.Data.StatisticData;
+import com.example.diplom11.Data.WordData;
 import com.example.diplom11.MainActivity;
+import com.example.diplom11.Models.StatisticModel;
 import com.example.diplom11.Models.WordModel;
 import com.example.diplom11.MyApplication;
 import com.example.diplom11.View.MainAppActivity;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Objects;
 import java.util.Random;
 
@@ -19,6 +25,7 @@ public class MainActivityPresenter implements BasePresenter {
 
     private MainAppActivity activity;
     private WordModel model;
+    private StatisticModel model1;
     private ArrayList<Integer> integers;
     private ArrayList<Integer> complexities;
     private Random random;
@@ -29,17 +36,13 @@ public class MainActivityPresenter implements BasePresenter {
     public MainActivityPresenter(MainAppActivity activity){
         this.activity=activity;
         model = new WordModel(activity.getApplicationContext());
+        model1 = new StatisticModel(activity.getApplicationContext());
         mSettings = activity.getSharedPreferences(MainActivity.APP_PREFERENCES,Context.MODE_PRIVATE);
         complex = mSettings.getString(MainActivity.APP_PREFERENCES_LEVEL_WORDS,"0");
 
 
 
-
-
-
     }
-
-
 
 
     @Override
@@ -49,11 +52,20 @@ public class MainActivityPresenter implements BasePresenter {
 
     @Override
     public void onItemCLick(int position) {
+        final Calendar c = Calendar.getInstance();
+        int mYear = c.get(Calendar.YEAR);
+        int mMonth = c.get(Calendar.MONTH);
+        int mDay = c.get(Calendar.DAY_OF_MONTH);
 
         if(Objects.equals(activity.getmSelectText().getText().toString(), model.getRussWord(activity.mAdapter.getItem(position)).getRussian())){
+
+
+            model1.addStatistic(new StatisticData(model.getRussWord(activity.mAdapter.getItem(position)).get_id(),1, mDay + ".0"+(mMonth+1) +"."+ (mYear-2000)));
             activity.finish();
         }
         else {
+            model1.addStatistic(new StatisticData(model.getRussWord(activity.mAdapter.getItem(position)).get_id(),-1, mDay + ".0"+(mMonth+1) +"."+ (mYear-2000)));
+
             activity.setmAdapter();
         }
 
