@@ -6,25 +6,25 @@ import android.content.Intent;
 
 import com.example.diplom11.Application.View.MainActivity;
 
+import java.util.Objects;
+
 /**
- * Created by Инна on 14.05.2018.
+ * Приемник широковещательных сообщений для включения главного экрана,если придет соответсвующий флаг
  */
 
 public class LockScreenReceiver extends BroadcastReceiver {
 
-    Intent i;
+
     public static boolean wasScreenOn = true;
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        System.out.println("start recieve from lockscreenreceiver");
         // если экран выключен то запускаем наш лок скрин
-        if (intent.getAction().equals(Intent.ACTION_SCREEN_OFF)) {
+        if (Objects.equals(intent.getAction(), Intent.ACTION_SCREEN_OFF)) {
             wasScreenOn = false;
-            System.out.println("openintent from receiver");
-            i = new Intent(context, MainActivity.class);
-            i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            context.startActivity(i);
+            Intent in = new Intent(context, MainActivity.class);
+            in.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(in);
 
         }
     }

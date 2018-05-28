@@ -3,6 +3,7 @@ package com.example.diplom11.Application.Presenters;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 
+import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 import com.example.diplom11.Application.Database.Entity.StatisticsData;
 import com.example.diplom11.Application.Database.Entity.WordData;
@@ -21,9 +22,9 @@ import java.util.List;
 
 public class StatisticsActivityPresenter implements BasePresenter {
 
-    private StatisticsActivity activity;
+    private AppCompatActivity activity;
     private BaseModel<StatisticsData> StatisticsModel;
-    private WordModel wordModel;
+    private BaseModel<WordData> wordModel;
     private List<StatisticsData> StatisticsData;
     private final Calendar c = Calendar.getInstance();
     private int mYear = c.get(Calendar.YEAR);
@@ -33,7 +34,7 @@ public class StatisticsActivityPresenter implements BasePresenter {
     private int m;
 
 
-    public StatisticsActivityPresenter(StatisticsActivity activity){
+    public StatisticsActivityPresenter(AppCompatActivity activity){
         this.activity=activity;
         StatisticsModel =new StatisticsModel(activity);
         wordModel =new WordModel(activity);
@@ -57,6 +58,8 @@ public class StatisticsActivityPresenter implements BasePresenter {
     public void onItemCLick(int position) {
 
     }
+
+
 
     public int getStudyWords(int flag){
         int count;
@@ -88,13 +91,8 @@ break;
 
     public int getCorrectAnswer(int flag){
         int count =0;
-
-
-
         switch (flag){
             case 1:
-
-
                 for (int i=1;i<m;i++){
                    if (StatisticsData.get(i).getCorrectAnswer()==1 &&(StatisticsData.get(i).getDateAnswer().equals(mDay + ".0"+(mMonth+1) +"."+ (mYear-2000)))){
                        count++;

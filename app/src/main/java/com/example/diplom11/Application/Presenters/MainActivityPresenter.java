@@ -2,6 +2,7 @@ package com.example.diplom11.Application.Presenters;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.support.v7.app.AppCompatActivity;
 
 import com.example.diplom11.Application.Database.Entity.StatisticsData;
 import com.example.diplom11.Application.Database.Entity.WordData;
@@ -20,7 +21,7 @@ import java.util.Random;
 
 public class MainActivityPresenter implements BasePresenter {
 
-    private MainAppActivity activity;
+    private AppCompatActivity activity;
     private BaseModel<WordData> wordModel;
     private BaseModel<StatisticsData> StatisticsModel;
     private ArrayList<Integer> integers;
@@ -30,7 +31,7 @@ public class MainActivityPresenter implements BasePresenter {
      private int StatisticsCountByWord =0;
 
 
-    public MainActivityPresenter(MainAppActivity activity){
+    public MainActivityPresenter(AppCompatActivity activity){
         this.activity=activity;
         wordModel = new WordModel(activity.getApplicationContext());
         StatisticsModel = new StatisticsModel(activity.getApplicationContext());
@@ -56,19 +57,21 @@ public class MainActivityPresenter implements BasePresenter {
         int mMonth = c.get(Calendar.MONTH);
         int mDay = c.get(Calendar.DAY_OF_MONTH);
 
-        if(Objects.equals(activity.getmSelectText().getText().toString(), ((WordModel)wordModel).getEnglishWord(activity.mAdapter.getItem(position)).getEnglish())){
-            StatisticsModel.addItem(new StatisticsData(((WordModel)wordModel).getEnglishWord(activity.mAdapter.getItem(position)).get_id(),1, mDay + ".0"+(mMonth+1) +"."+ (mYear-2000)));
+        if(Objects.equals(((MainAppActivity)activity).getmSelectText().getText().toString(), ((WordModel)wordModel).getEnglishWord(((MainAppActivity)activity).mAdapter.getItem(position)).getEnglish())){
+            StatisticsModel.addItem(new StatisticsData(((WordModel)wordModel).getEnglishWord(((MainAppActivity)activity).mAdapter.getItem(position)).get_id(),1, mDay + ".0"+(mMonth+1) +"."+ (mYear-2000)));
             activity.finish();
         }
         else {
-            StatisticsModel.addItem(new StatisticsData(((WordModel)wordModel).getEnglishWord(activity.mAdapter.getItem(position)).get_id(),-1, mDay + ".0"+(mMonth+1) +"."+ (mYear-2000)));
+            StatisticsModel.addItem(new StatisticsData(((WordModel)wordModel).getEnglishWord(((MainAppActivity)activity).mAdapter.getItem(position)).get_id(),-1, mDay + ".0"+(mMonth+1) +"."+ (mYear-2000)));
 
-            activity.setmAdapter();
+            ((MainAppActivity)activity).setmAdapter();
         }
 
     }
 
-private void checkWords(){
+
+
+    private void checkWords(){
         int count;
     for (int i=1;i<StatisticsCountByWord;i++) {
         count = ((StatisticsModel)StatisticsModel).getCountAnswerWord(i);
@@ -79,13 +82,13 @@ private void checkWords(){
     }
 }
 
-    public String getEngText(){
+    String getEngText(){
     return  wordModel.getItem(integers.get(getOnePosition(integers))).getEnglish();
     }
 
 
 //???????? 4 ????????? ? ?????????? id ????,??????? ? ?????????? ????? ????????????
-    public ArrayList<Integer> initPosition(){
+ArrayList<Integer> initPosition(){
 
         int count =0;
         integers = new ArrayList<>();

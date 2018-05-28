@@ -9,14 +9,18 @@ import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 
 
-import com.example.diplom11.Application.StatusTracking.MyService;
+import com.example.diplom11.Application.StatusTracking.LockScreenService;
 
 
+/**
+ * Активность, которую запускает сервис,если разблокировали экран
+ * в зависимости от настроек,включает соответсвтующее активити
+ */
 public class MainActivity extends AppCompatActivity {
-    public static final String APP_PREFERENCES = "mysettings";
+    public static final String APP_PREFERENCES = "mySettings";
     public static final String APP_PREFERENCES_LEVEL_WORDS = "0";
     public static final String APP_PREFERENCES_STUDY_MODES = "1";
-    Intent i;
+    Intent intent;
     String mode;
     SharedPreferences mSettings;
     PhoneStateListener phoneStateListener;
@@ -26,13 +30,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         mSettings = getSharedPreferences(MainActivity.APP_PREFERENCES, Context.MODE_PRIVATE);
         mode = mSettings.getString(APP_PREFERENCES_STUDY_MODES, "0");
-        System.out.println("startService from mainactivity");
-        startService(new Intent(this, MyService.class));
+        startService(new Intent(this, LockScreenService.class));
         // стартуем отслеживание состояния телефона
         phoneStateListener = new PhoneStateListener();
         // узнаем все сервисы которые есть
         TelephonyManager telephonyManager = (TelephonyManager) getSystemService(TELEPHONY_SERVICE);
         // слушаем когда телефон уходит в сон и включаем нашего блокировщика
+        assert telephonyManager != null;
         telephonyManager.listen(phoneStateListener, PhoneStateListener.LISTEN_CALL_STATE);
         initActivity(mode);
 
@@ -41,12 +45,12 @@ public class MainActivity extends AppCompatActivity {
     public void initActivity(String mode){
         switch (mode){
             case "0":
-                i = new Intent(this, MainAppActivity.class);
-                startActivity(i);
+                intent = new Intent(this, MainAppActivity.class);
+                startActivity(intent);
                 break;
             case "1":
-                i = new Intent(this, WordTranslateActivity.class);
-                startActivity(i);
+                intent= new Intent(this, WordTranslateActivity.class);
+                startActivity(intent);
 
         }
         finish();

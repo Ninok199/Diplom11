@@ -2,6 +2,7 @@ package com.example.diplom11.Application.Model;
 
 import android.content.Context;
 
+import com.example.diplom11.Application.Database.DatabaseStatisticsService;
 import com.example.diplom11.Application.Database.Entity.StatisticsData;
 import com.example.diplom11.Application.Database.DataBaseHandlerImpl;
 import com.example.diplom11.Application.Model.BaseModel;
@@ -9,12 +10,12 @@ import com.example.diplom11.Application.Model.BaseModel;
 import java.util.List;
 
 
-public class StatisticsModel implements BaseModel<StatisticsData> {
-    private DataBaseHandlerImpl db;
+ public class StatisticsModel implements BaseModel<StatisticsData> {
+    private DatabaseStatisticsService db;
 
     public StatisticsModel(Context c) {
 
-        db = new DataBaseHandlerImpl(c);
+        db = new DatabaseStatisticsService(c);
 
     }
 

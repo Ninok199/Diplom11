@@ -57,7 +57,6 @@ public void setmAdapter(){
 
     public void onClickConfigMenu(View view) {
 
-
         intent = new Intent(MainAppActivity.this, com.example.diplom11.Application.View.ConfigurationActivity.class);
         startActivity(intent);
         finish();
@@ -69,7 +68,5 @@ public void setmAdapter(){
         return mSelectText;
     }
 
-    public void setmSelectText(TextView mSelectText) {
-        this.mSelectText = mSelectText;
-    }
+
 }

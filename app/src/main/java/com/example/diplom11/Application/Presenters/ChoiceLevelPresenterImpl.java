@@ -2,6 +2,7 @@ package com.example.diplom11.Application.Presenters;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.support.v7.app.AppCompatActivity;
 import android.util.SparseBooleanArray;
 
 import com.example.diplom11.Application.View.MainActivity;
@@ -10,11 +11,11 @@ import com.example.diplom11.Application.View.ChoiceLevelActivity;
 
 
 public class ChoiceLevelPresenterImpl implements BasePresenter {
-    private ChoiceLevelActivity activity;
+    private AppCompatActivity activity;
     private SharedPreferences mSettings;
 
 
-    public ChoiceLevelPresenterImpl (ChoiceLevelActivity activity){
+    public ChoiceLevelPresenterImpl (AppCompatActivity activity){
         this.activity = activity;
         mSettings = activity.getSharedPreferences(MainActivity.APP_PREFERENCES, Context.MODE_PRIVATE);
 
@@ -36,7 +37,7 @@ public class ChoiceLevelPresenterImpl implements BasePresenter {
 
     public void onButtonSave(){
         int key=0;
-        SparseBooleanArray a =activity.menu.getCheckedItemPositions();
+        SparseBooleanArray a =((ChoiceLevelActivity)activity).menu.getCheckedItemPositions();
         for(int i=0;i<a.size();i++) {
             key += a.keyAt(i)+2;
 

@@ -2,7 +2,10 @@ package com.example.diplom11.Application.Presenters;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.support.v7.app.AppCompatActivity;
 
+import com.example.diplom11.Application.Database.Entity.WordData;
+import com.example.diplom11.Application.Model.BaseModel;
 import com.example.diplom11.Application.View.MainActivity;
 import com.example.diplom11.Application.Model.WordModel;
 import com.example.diplom11.Application.View.WordTranslateActivity;
@@ -16,18 +19,16 @@ import java.util.Random;
 
 public class WordTranslatePresenter implements BasePresenter {
 
-    WordTranslateActivity activity;
-    WordModel model;
+    private AppCompatActivity activity;
+    private BaseModel<WordData> model;
     private ArrayList<Integer> complexities;
-    private Random random;
-    private SharedPreferences mSettings;
-    String complex;
-    int positionWord;
+    private String complex;
+    private int positionWord;
 
-    public WordTranslatePresenter(WordTranslateActivity activity){
+    public WordTranslatePresenter(AppCompatActivity activity){
         this.activity=activity;
         model = new WordModel(activity);
-        mSettings = activity.getSharedPreferences(MainActivity.APP_PREFERENCES, Context.MODE_PRIVATE);
+        SharedPreferences mSettings = activity.getSharedPreferences(MainActivity.APP_PREFERENCES, Context.MODE_PRIVATE);
         complex = mSettings.getString(MainActivity.APP_PREFERENCES_LEVEL_WORDS,"0");
         positionWord =initPosition();
 
@@ -43,10 +44,12 @@ public class WordTranslatePresenter implements BasePresenter {
 
     }
 
-    public ArrayList<Integer> getComplexityWord(String complexity){
+
+
+    private ArrayList<Integer> getComplexityWord(String complexity){
         complexities = new ArrayList<>();
-        for(int i = 0; i<model.getWordsCount(complexity); i++){
-            int k = (int) model.getComplexity(complexity).get(i).get_id();
+        for(int i = 0; i<((WordModel)model).getWordsCount(complexity); i++){
+            int k = (int) ((WordModel)model).getComplexity(complexity).get(i).get_id();
             complexities.add(k);
 
 
@@ -55,11 +58,11 @@ public class WordTranslatePresenter implements BasePresenter {
         return complexities;
     }
 
-    public int  initPosition(){
+    private int  initPosition(){
 
         complexities = getComplexityWord(complex);
-        random=new Random();
-        int r = random.nextInt(model.getWordsCount(complex));
+        Random random = new Random();
+        int r = random.nextInt(((WordModel)model).getWordsCount(complex));
           return complexities.get(r);
 
     }

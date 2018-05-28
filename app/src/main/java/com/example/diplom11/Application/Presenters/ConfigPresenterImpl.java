@@ -2,6 +2,8 @@ package com.example.diplom11.Application.Presenters;
 
 
 
+import android.support.v7.app.AppCompatActivity;
+
 import com.example.diplom11.Application.View.AboutAppActivity;
 import com.example.diplom11.Application.View.ChoiceLevelActivity;
 import com.example.diplom11.Application.View.ChoiceModeActivity;
@@ -12,10 +14,10 @@ import com.example.diplom11.Application.View.VocabularyActivity;
 
 public class ConfigPresenterImpl implements BasePresenter {
 
-    private ConfigurationActivity activity;
+    private AppCompatActivity activity;
 
 
-    public ConfigPresenterImpl(ConfigurationActivity activity){
+    public ConfigPresenterImpl(AppCompatActivity activity){
         this.activity = activity;
 
     }
@@ -29,21 +31,23 @@ public class ConfigPresenterImpl implements BasePresenter {
     public void onItemCLick( int position) {
         switch (position){
             case 0:
-                activity.openActivity(ChoiceLevelActivity.class);
+                ((ConfigurationActivity)activity).openActivity(ChoiceLevelActivity.class);
                 break;
             case 1:
-                activity.openActivity(ChoiceModeActivity.class);
+                ((ConfigurationActivity)activity).openActivity(ChoiceModeActivity.class);
                 break;
             case 2:
-                activity.openActivity(StatisticsActivity.class);
+                ((ConfigurationActivity)activity).openActivity(StatisticsActivity.class);
                 break;
 
             case 3:
-                activity.openActivity(VocabularyActivity.class);
+                ((ConfigurationActivity)activity).openActivity(VocabularyActivity.class);
                 break;
             case 4:
-                activity.openActivity(AboutAppActivity.class);
+                ((ConfigurationActivity)activity).openActivity(AboutAppActivity.class);
                 break;
         }
     }
+
+
 }

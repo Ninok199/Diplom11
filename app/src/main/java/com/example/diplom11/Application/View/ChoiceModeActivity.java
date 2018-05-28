@@ -49,7 +49,9 @@ public class ChoiceModeActivity extends AppCompatActivity{
     }
 
     public void onSaveClick(View view) {
-        presenter.onSaveClick();
+        presenter.onButtonSave();
     }
+
+
 }
 

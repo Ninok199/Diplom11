@@ -13,7 +13,7 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
@@ -36,7 +36,7 @@
         <activity android:name=".Application.View.AboutAppActivity"></activity>
 
         <service
-            android:name=".Application.StatusTracking.MyService"
+            android:name=".Application.StatusTracking.LockScreenService"
             android:launchMode="singleTop"></service>
 
         <receiver

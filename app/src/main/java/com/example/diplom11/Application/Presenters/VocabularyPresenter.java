@@ -2,6 +2,7 @@ package com.example.diplom11.Application.Presenters;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -9,6 +10,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.diplom11.Application.Database.Entity.WordData;
+import com.example.diplom11.Application.Model.BaseModel;
 import com.example.diplom11.Application.Model.WordModel;
 import com.example.diplom11.R;
 import com.example.diplom11.Application.View.VocabularyActivity;
@@ -16,12 +18,12 @@ import com.example.diplom11.Application.View.VocabularyActivity;
 
 
 public class VocabularyPresenter implements BasePresenter {
-    VocabularyActivity activity;
-    WordModel model;
-    int wordCount;
+    private AppCompatActivity activity;
+    private BaseModel<WordData> model;
+    private int wordCount;
 
 
-    public VocabularyPresenter(VocabularyActivity activity){
+    public VocabularyPresenter(AppCompatActivity activity){
         this.activity=activity;
         model =new WordModel(activity);
         wordCount = model.getAllCount();
@@ -36,6 +38,7 @@ public class VocabularyPresenter implements BasePresenter {
     public void onItemCLick(int position) {
 
     }
+
 
 
     public int getWordCount(){
@@ -98,7 +101,6 @@ public class VocabularyPresenter implements BasePresenter {
 
 // Вызываем адаптер
         spinner.setAdapter(adapter);
-        final String selected = spinner.getSelectedItem().toString();
         final long k  = spinner.getSelectedItemId();
 
         LinearLayout layout = new LinearLayout(activity.getApplicationContext());

@@ -23,9 +23,8 @@ public class DataAdapter extends ArrayAdapter<String> {
     private static final String[] mContacts = { "Рыжик", "Барсик", "Мурзик",
             "Мурка" };
 
-    Context mContext;
-    private ArrayList<Integer> integers;
-    MainActivityPresenter presenter;
+    private Context mContext;
+    private MainActivityPresenter presenter;
 
     // Конструктор
     public DataAdapter(Context context, int textViewResourceId, MainAppActivity activity) {
@@ -41,7 +40,7 @@ public class DataAdapter extends ArrayAdapter<String> {
 
     public void initItems(){
         items = new ArrayList<>();
-        integers=presenter.initPosition();
+        ArrayList<Integer> integers = presenter.initPosition();
         for (int i=0;i<4;i++){
             String k = presenter.initStringItems().get(i);
             items.add(k);

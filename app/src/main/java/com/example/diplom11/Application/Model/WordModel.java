@@ -3,6 +3,7 @@ package com.example.diplom11.Application.Model;
 import android.content.Context;
 
 import com.example.diplom11.Application.Database.DataBaseHandlerImpl;
+import com.example.diplom11.Application.Database.DatabaseWordService;
 import com.example.diplom11.Application.Database.Entity.WordData;
 import com.example.diplom11.Application.Model.BaseModel;
 
@@ -16,10 +17,10 @@ import java.util.List;
 public class WordModel implements BaseModel<WordData>
 {
 
-    private DataBaseHandlerImpl db;
+    private DatabaseWordService db;
     public WordModel(Context c){
 
-        db = new DataBaseHandlerImpl(c);
+        db = new DatabaseWordService(c);
         initDB();
 
 
@@ -52,8 +53,6 @@ public class WordModel implements BaseModel<WordData>
     public List<WordData> getComplexity(String complexity){
         return db.getComplexity(complexity);
     }
-
-
 
 
 
