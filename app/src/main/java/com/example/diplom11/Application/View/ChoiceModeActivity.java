@@ -1,5 +1,6 @@
 package com.example.diplom11.Application.View;
 
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -21,7 +22,10 @@ public class ChoiceModeActivity extends AppCompatActivity{
     ChoiceModePresenterImpl presenter;
     TextView textView;
 
-
+    /**
+     * инициализация всех объектов, установка шрифтов и адаптера
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,5 +57,12 @@ public class ChoiceModeActivity extends AppCompatActivity{
     }
 
 
+    public void onInfoClick(View view) {
+        Intent i = new Intent(getApplicationContext(),
+                FullImageActivity.class);
+        // передаем индекс массива
+        i.putExtra("id", 1);
+        startActivity(i);
+    }
 }
 

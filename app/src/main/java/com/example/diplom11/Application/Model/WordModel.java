@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * Created by Инна on 05.05.2018.
+ * класс, отвечающий за считывание и запись данных в таблицу слов
  */
 
 public class WordModel implements BaseModel<WordData>
@@ -25,8 +25,12 @@ public class WordModel implements BaseModel<WordData>
 
 
     }
-
-
+public WordModel(DatabaseWordService db){
+        this.db = db;
+};
+    /**
+     * открытие базы данных
+     */
     private void initDB(){
         try {
             db.createDataBase();
@@ -43,7 +47,11 @@ public class WordModel implements BaseModel<WordData>
         return db.getColumnEnglish(russ);
     }
 
-
+    /**
+     * получает количество слов в базе по сложности
+     * @param flag сложность
+     * @return количество слов
+     */
     public int getWordsCount(String flag) {
         return db.getWordsCount(flag);
     }

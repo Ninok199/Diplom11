@@ -11,7 +11,7 @@ import com.example.diplom11.Application.Presenters.WordTranslatePresenter;
 import com.example.diplom11.R;
 
 /**
- * Created by Инна on 11.05.2018.
+ * класс, отвечающий за отображение элементов на экране в режиме слово-перевод
  */
 
 public class WordTranslateActivity extends AppCompatActivity {
@@ -45,6 +45,9 @@ public class WordTranslateActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * инициация объектов на экране и устанока шрифтов
+     */
     public void initItems(){
         engText = findViewById(R.id.textViewEng);
         rusText = findViewById(R.id.textViewRuss);
@@ -59,8 +62,6 @@ public class WordTranslateActivity extends AppCompatActivity {
         engText.setTypeface(Typeface.createFromAsset(
                 getAssets(), "fonts/11364.ttf"));
         rusText.setTypeface(Typeface.createFromAsset(
-                getAssets(), "fonts/11364.ttf"));
-        transText.setTypeface(Typeface.createFromAsset(
                 getAssets(), "fonts/11364.ttf"));
         partSpeechText.setTypeface(Typeface.createFromAsset(
                 getAssets(), "fonts/11364.ttf"));

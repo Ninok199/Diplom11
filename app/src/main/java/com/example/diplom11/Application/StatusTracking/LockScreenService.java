@@ -28,6 +28,13 @@ public class LockScreenService extends Service {
         super.onCreate();
     }
 
+    /**
+     * метод для начала работы сервиса
+     * @param intent
+     * @param flags
+     * @param startId
+     * @return
+     */
     public int onStartCommand(Intent intent, int flags, int startId) {
         // проверяем в фоне все время работы экрана
         IntentFilter filter = new IntentFilter(Intent.ACTION_SCREEN_ON);

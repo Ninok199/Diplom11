@@ -12,6 +12,9 @@ import android.widget.TextView;
 import com.example.diplom11.Application.Presenters.VocabularyPresenter;
 import com.example.diplom11.R;
 
+/**
+ * класс, отвечающий за отображение словаря пользователю
+ */
 public class VocabularyActivity extends AppCompatActivity {
 
     TableLayout tableLayout;
@@ -33,7 +36,9 @@ public class VocabularyActivity extends AppCompatActivity {
 
     }
 
-
+    /**
+     * добавление данный в строки таблицы для отображения
+     */
 
     public void initData(){
 
@@ -43,7 +48,13 @@ public class VocabularyActivity extends AppCompatActivity {
         }
         }
 
-
+    /**
+     * создание таблицы
+     * @param c0 англ значение
+     * @param c1 транскрипция
+     * @param c2 русс значение
+     * @param c3 часть речи
+     */
 
     public void addRow(String c0, String c1, String c2, String c3) {
         //Сначала найдем в разметке активити саму таблицу по идентификатору

@@ -1,5 +1,6 @@
 package com.example.diplom11.Application.View;
 
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -12,13 +13,19 @@ import android.widget.TextView;
 import com.example.diplom11.Application.Presenters.ChoiceLevelPresenterImpl;
 import com.example.diplom11.R;
 
-
+/**
+ * окно для отображения элентов выбора уровня сложности слов
+ */
 
 public class ChoiceLevelActivity extends AppCompatActivity {
     public ListView menu;
     ChoiceLevelPresenterImpl presenter;
     TextView textView;
 
+    /**
+     * инициализация окна с объектами на нем
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,5 +56,13 @@ public class ChoiceLevelActivity extends AppCompatActivity {
 
     public void onSaveClick(View view) {
         presenter.onButtonSave();
+    }
+
+    public void onInfoClick(View view) {
+        Intent i = new Intent(getApplicationContext(),
+                FullImageActivity.class);
+        // передаем индекс массива
+        i.putExtra("id", 2);
+        startActivity(i);
     }
 }

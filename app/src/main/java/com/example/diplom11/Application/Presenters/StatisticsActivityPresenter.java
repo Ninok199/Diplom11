@@ -12,14 +12,15 @@ import com.example.diplom11.Application.Model.BaseModel;
 import com.example.diplom11.Application.Model.StatisticsModel;
 import com.example.diplom11.Application.Model.WordModel;
 
-import com.example.diplom11.Application.View.StatisticsActivity;
 
 
 import java.util.Calendar;
 
 import java.util.List;
 
-
+/**
+ * класс, отвечающий за логику окна со статистикой
+ */
 public class StatisticsActivityPresenter implements BasePresenter {
 
     private AppCompatActivity activity;
@@ -60,7 +61,12 @@ public class StatisticsActivityPresenter implements BasePresenter {
     }
 
 
-
+    /**
+     * метод получает количество выученных слов
+     * @param flag флаг, который определяет за какой промежуток времени нужно
+     *             получить количество слов
+     * @return количество слов
+     */
     public int getStudyWords(int flag){
         int count;
         int word=0;
@@ -88,7 +94,12 @@ break;
         return word;
     }
 
-
+    /**
+     * метод, который возвращает количество правильных ответов на на вопросы
+     * @param flag флаг, который определяет за какой промежуток времени нужно
+     *             получить количество ответов
+     * @return количество ответов
+     */
     public int getCorrectAnswer(int flag){
         int count =0;
         switch (flag){
@@ -113,7 +124,9 @@ break;
        return count;
     }
 
-
+    /**
+     * метод, который позволяет начать обучение заново
+     */
      public void startAgain(){
 
          AlertDialog.Builder alert = new AlertDialog.Builder(activity);
@@ -123,7 +136,7 @@ break;
          alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
              public void onClick(DialogInterface dialog, int whichButton) {
 
-                for (int i =1;i<m;i++){
+                for (int i =1;i<m+1;i++){
                     StatisticsModel.updateItem(new StatisticsData(StatisticsModel.getItem(i).get_id_Statistics(),StatisticsModel.getItem(i).get_id_Statistics(),0,StatisticsModel.getItem(i).getDateAnswer()));
                 }
 
@@ -145,7 +158,12 @@ break;
          alert.show();
      }
 
-
+    /**
+     * метод, который возвращает количество неправильных ответов на на вопросы
+     * @param flag флаг, который определяет за какой промежуток времени нужно
+     *             получить количество ответов
+     * @return количество ответов
+     */
         public int getIncorrectAnswer(int flag){
         int count =0;
 

@@ -9,7 +9,9 @@ import com.example.diplom11.Application.View.MainActivity;
 import com.example.diplom11.Application.View.ChoiceLevelActivity;
 
 
-
+/**
+ * Презентер для окна с выбором уровня сложности слов
+ */
 public class ChoiceLevelPresenterImpl implements BasePresenter {
     private AppCompatActivity activity;
     private SharedPreferences mSettings;
@@ -34,7 +36,9 @@ public class ChoiceLevelPresenterImpl implements BasePresenter {
         }
 
 
-
+    /**
+     * метод, который сохраняет в настойки приложения уровень слов, который выбрал пользователь
+     */
     public void onButtonSave(){
         int key=0;
         SparseBooleanArray a =((ChoiceLevelActivity)activity).menu.getCheckedItemPositions();

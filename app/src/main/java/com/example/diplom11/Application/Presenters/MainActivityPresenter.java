@@ -17,7 +17,9 @@ import java.util.Calendar;
 import java.util.Objects;
 import java.util.Random;
 
-
+/**
+ * класс, который отвечает за логику окна в режиме вопрос-ответ
+ */
 
 public class MainActivityPresenter implements BasePresenter {
 
@@ -70,7 +72,9 @@ public class MainActivityPresenter implements BasePresenter {
     }
 
 
-
+    /**
+     * метод для проверки выученых слов
+     */
     private void checkWords(){
         int count;
     for (int i=1;i<StatisticsCountByWord;i++) {
@@ -87,8 +91,11 @@ public class MainActivityPresenter implements BasePresenter {
     }
 
 
-//???????? 4 ????????? ? ?????????? id ????,??????? ? ?????????? ????? ????????????
-ArrayList<Integer> initPosition(){
+    /**
+     * метод, который генерирует 4 уникальных рандомных целых числа от 1 до количества всех слов в базе
+     * @return массив сгенерированых чисел
+     */
+    ArrayList<Integer> initPosition(){
 
         int count =0;
         integers = new ArrayList<>();
@@ -114,14 +121,21 @@ ArrayList<Integer> initPosition(){
         return integers;
     }
 
-    //????? ??? ?????? ?????? ?? 4 ???? ??? ??????????? ????????
+    /**
+     * метод, который рандомно выбирает одно число из 4х предоставленых
+     * @param integers массив 4 рандомных чисел
+     * @return одно число из входящих четырех
+     */
     private int getOnePosition(ArrayList<Integer> integers){
         random = new Random();
         return random.nextInt(integers.size());
     }
 
-    // ?????????? ???? ????? ?? ?????? ? ???????????? ? ?????????
-    public ArrayList<String> initStringItems(){
+    /**
+     * метод инициирует английские слова по идентификаторам, которые были сгенерированы
+     * @return строковый массив англ слов для дальнейшего вывода на экран
+     */
+    ArrayList<String> initStringItems(){
         ArrayList<String> items = new ArrayList<>();
         for(int i=0;i<4;i++) {
             String k = wordModel.getItem(integers.get(i)).getRussian();
@@ -131,7 +145,12 @@ ArrayList<Integer> initPosition(){
         return items;
     }
 
-    private ArrayList<Integer> getComplexityWord(String complexity){
+    /**
+     * метод который заполняет массив айдищниками слов определенной сложности
+     * @param complexity сложность слова
+     * @return массив идентификаторов
+     */
+    public ArrayList<Integer> getComplexityWord(String complexity){
         complexities = new ArrayList<>();
 
         for(int i = 0; i<((WordModel)wordModel).getWordsCount(complexity); i++){

@@ -15,7 +15,9 @@ import com.example.diplom11.Application.Presenters.BasePresenter;
 import com.example.diplom11.Application.Presenters.ConfigPresenterImpl;
 import com.example.diplom11.R;
 
-
+/**
+ * класс, отвечающий за отображения настроек приложения пользователю
+ */
 
 public class ConfigurationActivity extends AppCompatActivity  {
     ListView menu;
@@ -53,5 +55,12 @@ public class ConfigurationActivity extends AppCompatActivity  {
 
             }
 
+    public void onInfoClick(View view) {
+        Intent i = new Intent(getApplicationContext(),
+                FullImageActivity.class);
+        // передаем индекс массива
+        i.putExtra("id", 0);
+        startActivity(i);
     }
+}
 

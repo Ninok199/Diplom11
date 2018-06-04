@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
- * Created by Инна on 11.05.2018.
+ * Метод, который отвечает за логику окна в режиме слово-перевод
  */
 
 public class WordTranslatePresenter implements BasePresenter {
@@ -34,6 +34,10 @@ public class WordTranslatePresenter implements BasePresenter {
 
 
     }
+    public WordTranslatePresenter(WordModel model, int pos){
+        this.model =model;
+        positionWord = pos;
+    }
     @Override
     public void onBackClick() {
         activity.finish();
@@ -45,19 +49,26 @@ public class WordTranslatePresenter implements BasePresenter {
     }
 
 
-
+    /**
+     * метод, который получает массив идентификаторов слов определенной сложности
+     * @param complexity сложность слов
+     * @return массив идентификаторов
+     */
     private ArrayList<Integer> getComplexityWord(String complexity){
         complexities = new ArrayList<>();
         for(int i = 0; i<((WordModel)model).getWordsCount(complexity); i++){
             int k = (int) ((WordModel)model).getComplexity(complexity).get(i).get_id();
             complexities.add(k);
 
-
         }
 
         return complexities;
     }
 
+    /**
+     * метод для генирации одного рандомного слова, который отобразится на экране для обучения
+     * @return целое рандомное число
+     */
     private int  initPosition(){
 
         complexities = getComplexityWord(complex);
@@ -89,9 +100,13 @@ public class WordTranslatePresenter implements BasePresenter {
                 return "noun";
 
             case 2:
+                return "adverb";
+            case 3:
+                return "verb";
+            case 4:
                 return "adj";
 
         }
-        return "ppppp";
+        return "other";
     }
 }
