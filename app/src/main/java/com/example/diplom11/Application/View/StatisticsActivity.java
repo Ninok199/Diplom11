@@ -1,5 +1,6 @@
 package com.example.diplom11.Application.View;
 
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,6 +14,9 @@ import com.example.diplom11.R;
 import static com.example.diplom11.R.string.*;
 import static com.example.diplom11.R.string.correctanswer;
 
+/**
+ * класс, отвечающий за отображение статистики
+ */
 
 public class StatisticsActivity extends AppCompatActivity {
 StatisticsActivityPresenter presenter;
@@ -48,7 +52,10 @@ TextView text;
 
     }
 
-
+    /**
+     * установка текстовых значений на экран за все время обучения
+     * @param view
+     */
 
     public void onAllTimeStatisticsClick(View view) {
 
@@ -62,7 +69,10 @@ TextView text;
         presenter.onBackClick();
 
     }
-
+    /**
+     * установка текстовых значений на экран за последние сутки
+     * @param view
+     */
     public void onDayStartisticClick(View view) {
         correctAnswerView.setText(getString(correctanswer)+ presenter.getCorrectAnswer(1));
         incorrectAnswer.setText(getString(incorrectanswer)+presenter.getIncorrectAnswer(1));
@@ -72,5 +82,13 @@ TextView text;
 
     public void onStartAgainClick(View view) {
         presenter.startAgain();
+    }
+
+    public void onInfoClick(View view) {
+        Intent i = new Intent(getApplicationContext(),
+                FullImageActivity.class);
+        // передаем индекс массива
+        i.putExtra("id", 3);
+        startActivity(i);
     }
 }

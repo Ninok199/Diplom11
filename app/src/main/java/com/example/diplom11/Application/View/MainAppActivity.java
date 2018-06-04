@@ -13,6 +13,9 @@ import com.example.diplom11.Application.Presenters.DataAdapter;
 import com.example.diplom11.Application.Presenters.MainActivityPresenter;
 import com.example.diplom11.R;
 
+/**
+ * класс, отвечающий за отображение элементов в режиме вопрос-ответ
+ */
 
 public class MainAppActivity extends AppCompatActivity {
     Intent intent;
@@ -46,7 +49,9 @@ public class MainAppActivity extends AppCompatActivity {
 
     }
 
-
+    /**
+     * уставка адаптера для отображения текста на экране
+     */
 
 public void setmAdapter(){
     mAdapter = new DataAdapter(this,

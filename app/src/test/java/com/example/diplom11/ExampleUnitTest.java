@@ -1,5 +1,9 @@
 package com.example.diplom11;
 
+import android.support.v7.app.AppCompatActivity;
+
+import com.example.diplom11.Application.Presenters.ConfigPresenterImpl;
+
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -14,4 +18,5 @@ public class ExampleUnitTest {
     public void addition_isCorrect() throws Exception {
         assertEquals(4, 2 + 2);
     }
+
 }

@@ -11,7 +11,10 @@ import com.example.diplom11.Application.View.ConfigurationActivity;
 import com.example.diplom11.Application.View.StatisticsActivity;
 import com.example.diplom11.Application.View.VocabularyActivity;
 
-
+/**
+ * класс, отвечающий за логику окна настроек. Благодаря нему производится переход
+ * ко всем остальным окнам
+ */
 public class ConfigPresenterImpl implements BasePresenter {
 
     private AppCompatActivity activity;
@@ -27,6 +30,11 @@ public class ConfigPresenterImpl implements BasePresenter {
          activity.finish();
     }
 
+    /**
+     * слушатель для пунктов меню настроек программы
+     * в зависимости от выбора пользователя, открываеться соответствующее окно
+     * @param position номер пункта меню
+     */
     @Override
     public void onItemCLick( int position) {
         switch (position){

@@ -4,9 +4,6 @@ import android.content.Context;
 
 import com.example.diplom11.Application.Database.DatabaseStatisticsService;
 import com.example.diplom11.Application.Database.Entity.StatisticsData;
-import com.example.diplom11.Application.Database.DataBaseHandlerImpl;
-import com.example.diplom11.Application.Model.BaseModel;
-
 import java.util.List;
 
 
@@ -19,15 +16,28 @@ import java.util.List;
 
     }
 
+     /**
+      * получает сумму ответов по каждому слову
+      * @param id номер слова
+      * @return сумма ответов
+      */
     public int getCountAnswerWord(int id){
         return db.getCountAnswerWord(id);
     }
 
-
+     /**
+      * метод для получения даты последнего ответа по каждому слову
+      * @param id номер слова
+      * @return дата ответа
+      */
     public String getDataAnswerWord(int id){
         return db.getDataAnswerWord(id);
     }
 
+     /**
+      * метод для получения количества слов, на которые есть уже ответы
+      * @return количество слов
+      */
     public int getStatisticsCountByWord() {
         return db.getStatisticsCountByWord();
     }

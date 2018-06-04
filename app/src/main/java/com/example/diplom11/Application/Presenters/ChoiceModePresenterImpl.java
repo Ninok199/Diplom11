@@ -31,7 +31,9 @@ public class ChoiceModePresenterImpl implements BasePresenter {
 
     }
 
-
+    /**
+     * метод сохраняет режим для обучения, который выберет пользователь, в настройки приложения
+     */
     public void onButtonSave() {
         SharedPreferences.Editor editor = mSettings.edit();
         editor.putString(MainActivity.APP_PREFERENCES_STUDY_MODES, String.valueOf(pos));

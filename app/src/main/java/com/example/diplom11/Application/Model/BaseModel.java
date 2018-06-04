@@ -3,7 +3,7 @@ package com.example.diplom11.Application.Model;
 import java.util.List;
 
 /**
- * Created by Инна on 23.05.2018.
+ * интерфейс для моделей данных
  */
 
 public interface BaseModel<T> {

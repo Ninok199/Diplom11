@@ -20,8 +20,8 @@ import java.util.ArrayList;
 public class DataAdapter extends ArrayAdapter<String> {
 
     private  ArrayList<String> items;
-    private static final String[] mContacts = { "Рыжик", "Барсик", "Мурзик",
-            "Мурка" };
+    private static final String[] mContacts = { "111", "222", "333",
+            "444" };
 
     private Context mContext;
     private MainActivityPresenter presenter;
@@ -36,7 +36,6 @@ public class DataAdapter extends ArrayAdapter<String> {
 
 
     }
-
 
     public void initItems(){
         items = new ArrayList<>();

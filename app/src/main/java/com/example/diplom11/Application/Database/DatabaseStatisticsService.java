@@ -4,7 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
+
 
 import com.example.diplom11.Application.Database.Entity.StatisticsData;
 
@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Инна on 27.05.2018.
+ * Класс, который отвечает за запросы в таблицу Statistics
  */
 
 public class DatabaseStatisticsService extends DataBaseHandlerImpl {
@@ -20,12 +20,18 @@ public class DatabaseStatisticsService extends DataBaseHandlerImpl {
      * Constructor should be private to prevent direct instantiation.
      * make call to static factory method "getInstance()" instead.
      *
-     * @param context
+     * @param context контекст ативити
      */
 
     public DatabaseStatisticsService(Context context) {
         super(context);
     }
+
+    /**
+     * метод для нахождения суммы ответов по каждому слову
+     * @param id идентификатор
+     * @return count
+     */
     public int getCountAnswerWord(int id){
         myDataBase = this.getReadableDatabase();
         String selectQuery = "select statistics._id_word, sum(statistics.correct_answer)  from word, statistics where word._id = statistics._id_word and word._id ="+ id+ " group by word._id;";
@@ -49,6 +55,11 @@ public class DatabaseStatisticsService extends DataBaseHandlerImpl {
 
     }
 
+    /**
+     * метод для получения даты последнего ответа на поставленный вопрос
+     * @param id идетификатор слова
+     * @return дату последнего ответа
+     */
     public String getDataAnswerWord(int id){
         myDataBase = this.getReadableDatabase();
         String selectQuery = "select statistics.date_answer, sum(statistics.correct_answer)  from word, statistics where word._id = statistics._id_word and word._id ="+ id+ " group by word._id;";
@@ -73,7 +84,12 @@ public class DatabaseStatisticsService extends DataBaseHandlerImpl {
 
     }
 
-
+    /**
+     * метод для получения одного поля со статистикой из базы
+     * @param id идентификатор слова
+     * @return поле статистики
+     */
+    @SuppressLint("Recycle")
     public StatisticsData getStatistics(int id) {
         myDataBase = this.getReadableDatabase();
         Cursor cursor;
@@ -98,7 +114,10 @@ public class DatabaseStatisticsService extends DataBaseHandlerImpl {
         return data;
     }
 
-
+    /**
+     * метод для получения всех записей с базы статистики
+     * @return всю статистику
+     */
     public List<StatisticsData> getAllStatistics() {
         List<StatisticsData> wordList = new ArrayList<>();
         String selectQuery = "SELECT  * FROM " + TABLE_NAME_StatisticsS;
@@ -126,8 +145,11 @@ public class DatabaseStatisticsService extends DataBaseHandlerImpl {
     }
 
 
-
-
+    /**
+     * метод для подсчета количетва полей статистики в базе
+     * @return количество полей
+     */
+    @SuppressLint("Recycle")
     public int getStatisticsCount() {
         myDataBase = this.getReadableDatabase();
         Cursor cursor;
@@ -150,6 +172,10 @@ public class DatabaseStatisticsService extends DataBaseHandlerImpl {
         return count;
     }
 
+    /**
+     * метод для подсчета количества слов в базе статистики
+     * @return количество слов в базе
+     */
     @SuppressLint("Recycle")
     public int getStatisticsCountByWord() {
         myDataBase = this.getReadableDatabase();
@@ -173,7 +199,10 @@ public class DatabaseStatisticsService extends DataBaseHandlerImpl {
     }
 
 
-
+    /**
+     * метод для добавления нового поля в статистику
+     * @param StatisticsData новое слово
+     */
     public void addStatistics(StatisticsData StatisticsData) {
         myDataBase = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -186,7 +215,10 @@ public class DatabaseStatisticsService extends DataBaseHandlerImpl {
     }
 
 
-
+    /**
+     * метод для обновления статистики
+     * @param statisticsData слово, которое надо обновить
+     */
     public void updateStatistics(StatisticsData statisticsData){
         myDataBase = this.getWritableDatabase();
         ContentValues values = new ContentValues();
